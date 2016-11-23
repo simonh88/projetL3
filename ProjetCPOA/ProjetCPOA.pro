@@ -14,9 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    test.cpp
+    test.cpp \
+    location.cpp \
+    leslocations.cpp
 
 HEADERS  += mainwindow.h \
-    test.h
+    test.h \
+    location.h \
+    leslocations.h
 
 FORMS    += mainwindow.ui
