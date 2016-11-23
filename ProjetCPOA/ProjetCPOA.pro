@@ -13,18 +13,23 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     test.cpp \
     lesclients.cpp \
     client.cpp \
     lesvehicues.cpp \
-    vehicule.cpp
+    vehicule.cpp \
+    location.cpp \
+    leslocations.cpp
+
 
 HEADERS  += mainwindow.h \
     test.h \
     lesclients.h \
     client.h \
     lesvehicues.h \
+    location.h \
+    leslocations.h \
     vehicule.h
 
 FORMS    += mainwindow.ui
