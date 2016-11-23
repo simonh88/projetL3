@@ -21,6 +21,10 @@ private:
 
 private slots :
     void form_addClient();
+    void form_addVehicule();
+    void form_addChauffeur();
+    void form_addParc();
+    void form_addLocation();
 };
 
 #endif // MAINWINDOW_H
