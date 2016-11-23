@@ -14,9 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    test.cpp
+    test.cpp \
+    lesclients.cpp \
+    client.cpp \
+    lesvehicues.cpp \
+    vehicule.cpp
 
 HEADERS  += mainwindow.h \
-    test.h
+    test.h \
+    lesclients.h \
+    client.h \
+    lesvehicues.h \
+    vehicule.h
 
 FORMS    += mainwindow.ui
