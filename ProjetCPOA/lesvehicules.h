@@ -2,10 +2,10 @@
 #define LESVEHICUES_H
 
 
-class LesVehicues
+class LesVehicules
 {
 public:
-    LesVehicues();
+    LesVehicules();
 };
 
 #endif // LESVEHICUES_H

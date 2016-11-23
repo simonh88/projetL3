@@ -16,8 +16,8 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     test.cpp \
     lesclients.cpp \
-    client.cpp \
-    lesvehicues.cpp \
+    client.cpp \gi \
+    lesvehicules.cpp
     vehicule.cpp \
     location.cpp \
     leslocations.cpp
@@ -27,9 +27,9 @@ HEADERS  += mainwindow.h \
     test.h \
     lesclients.h \
     client.h \
-    lesvehicues.h \
     location.h \
     leslocations.h \
-    vehicule.h
+    vehicule.h \
+    lesvehicules.h
 
 FORMS    += mainwindow.ui
