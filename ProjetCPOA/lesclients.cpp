@@ -14,7 +14,7 @@ Client LesClients::getClient(int id) const
     return this->LesClients.at(i);
 }
 
-void LesClients::setClient(const Client c)
+void LesClients::setClient(const Client &c)
 {
     this->LesClients.push_back(c);
 }

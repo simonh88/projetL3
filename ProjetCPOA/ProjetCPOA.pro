@@ -17,7 +17,7 @@ SOURCES += main.cpp\
     test.cpp \
     lesclients.cpp \
     client.cpp \gi \
-    lesvehicules.cpp
+    lesvehicules.cpp \
     vehicule.cpp \
     location.cpp \
     leslocations.cpp

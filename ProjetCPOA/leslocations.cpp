@@ -14,6 +14,5 @@ LesLocations::getSize(){
 }
 
 LesLocations::addLocation(const Location &loc){
-    int id = loc.getIdLocation();
-    listLocation.at(id)=loc;
+    this->listLocation.push_back(loc);
 }
