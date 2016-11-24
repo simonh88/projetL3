@@ -17,10 +17,7 @@ std::string Client::getPrenom() const
     return prenom;
 }
 
-std::string Client::getPrenom() const
-{
-    return prenom;
-}
+
 
 std::string Client::getNom() const
 {
@@ -32,10 +29,7 @@ int Client::getIdClient() const
     return idClient;
 }
 
-void Client::setAdresse(const std::string &value)
-{
-    adresse = value;
-}
+
 
 void Client::setPrenom(const std::string &value)
 {

@@ -13,6 +13,14 @@ private:
 
 public:
     Client();
+    std::string getAdresse() const;
+    void setAdresse(const std::string &value);
+    std::string getPrenom() const;
+    std::string getNom() const;
+    int getIdClient() const;
+    void setPrenom(const std::string &value);
+    void setNom(const std::string &value);
+    void setIdClient(int value);
 };
 
 #endif // CLIENT_H

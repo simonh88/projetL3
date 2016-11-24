@@ -11,16 +11,16 @@ LesClients::LesClients()
 
 Client LesClients::getClient(int id) const
 {
-    return this->LesClients.at(i);
+    return this->listClients.at(id);
 }
 
 void LesClients::setClient(const Client &c)
 {
-    this->LesClients.push_back(c);
+    this->listClients.push_back(c);
 }
 
 int LesClients::getSize() const
 {
-    return this->LesClients.size();
+    return this->listClients.size();
 }
 
