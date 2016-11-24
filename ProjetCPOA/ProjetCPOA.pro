@@ -16,11 +16,15 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     test.cpp \
     lesclients.cpp \
-    client.cpp \gi \
+    client.cpp \
     lesvehicules.cpp \
     vehicule.cpp \
     location.cpp \
-    leslocations.cpp
+    leslocations.cpp \
+    date.cpp \
+    bus.cpp \
+    voiture.cpp \
+    velo.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -30,6 +34,10 @@ HEADERS  += mainwindow.h \
     location.h \
     leslocations.h \
     vehicule.h \
-    lesvehicules.h
+    lesvehicules.h \
+    date.h \
+    bus.h \
+    voiture.h \
+    velo.h
 
 FORMS    += mainwindow.ui

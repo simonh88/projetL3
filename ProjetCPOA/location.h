@@ -1,7 +1,9 @@
-#include <string>
 #ifndef LOCATION_H
 #define LOCATION_H
-
+#include <string>
+#include "date.h"
+#include "vehicule.h"
+#include "client.h"
 
 class Location
 {

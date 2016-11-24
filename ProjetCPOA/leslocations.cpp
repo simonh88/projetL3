@@ -5,14 +5,14 @@ LesLocations::LesLocations()
 
 }
 
-LesLocations::getLocation(int id){
-    return listLocation.at(id);
+Location LesLocations::getLocation(int id){
+    return this->listLocation.at(id);
 }
 
-LesLocations::getSize(){
-    return listLocation.size();
+int LesLocations::getSize(){
+    return this->listLocation.size();
 }
 
-LesLocations::addLocation(const Location &loc){
+void LesLocations::addLocation(const Location &loc){
     this->listLocation.push_back(loc);
 }

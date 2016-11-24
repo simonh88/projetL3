@@ -1,7 +1,7 @@
-#include <vector>
 #ifndef LESLOCATIONS_H
 #define LESLOCATIONS_H
-
+#include <vector>
+#include "location.h"
 
 class LesLocations
 {

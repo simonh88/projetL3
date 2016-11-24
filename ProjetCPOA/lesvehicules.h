@@ -1,6 +1,7 @@
 #ifndef LESVEHICULES_H
 #define LESVEHICULES_H
 #include "vehicule.h"
+#include <vector>
 
 class LesVehicules
 {
