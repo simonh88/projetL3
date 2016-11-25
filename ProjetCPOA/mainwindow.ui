@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -303,6 +303,9 @@
       <string>Ajouter un Véhicule</string>
      </attribute>
      <widget class="QCheckBox" name="add_vehDispo">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>370</x>
@@ -316,6 +319,9 @@
       </property>
      </widget>
      <widget class="QDateEdit" name="add_vehCT">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -326,6 +332,9 @@
       </property>
      </widget>
      <widget class="QTextEdit" name="add_vehModele">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -347,8 +356,14 @@
       <property name="text">
        <string>Bus</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QCheckBox" name="add_vehAssistElec">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -389,6 +404,9 @@
       <property name="text">
        <string>Voiture</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QLabel" name="label_11">
       <property name="geometry">
@@ -417,6 +435,9 @@
       </property>
      </widget>
      <widget class="QSpinBox" name="add_vehPlaces">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -427,6 +448,9 @@
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="add_vehPrix">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -448,8 +472,14 @@
       <property name="text">
        <string>Vélo</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
      <widget class="QTextEdit" name="add_vehImmat">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -1066,4 +1096,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

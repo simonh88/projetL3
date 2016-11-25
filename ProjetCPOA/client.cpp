@@ -1,5 +1,26 @@
 #include "client.h"
 #include <string>
+#include <iostream>
+
+
+//-------------------------------- CONSTRUCTORS --------------------------------
+
+
+Client::Client()
+{
+
+
+}
+
+
+Client::Client(std::string &nom2, std::string &prenom2, std::string &adresse2): idClient(0), nom(nom2), prenom(prenom2), adresse(adresse2)
+{
+
+}
+
+
+//-------------------------------- GETTERS -------------------------------------
+
 
 
 std::string Client::getAdresse() const
@@ -7,17 +28,10 @@ std::string Client::getAdresse() const
     return adresse;
 }
 
-void Client::setAdresse(const std::string &value)
-{
-    adresse = value;
-}
-
 std::string Client::getPrenom() const
 {
     return prenom;
 }
-
-
 
 std::string Client::getNom() const
 {
@@ -30,6 +44,13 @@ int Client::getIdClient() const
 }
 
 
+//-------------------------------- SETTERS -------------------------------------
+
+
+void Client::setAdresse(const std::string &value)
+{
+    adresse = value;
+}
 
 void Client::setPrenom(const std::string &value)
 {
@@ -46,9 +67,13 @@ void Client::setIdClient(int value)
     idClient = value;
 }
 
-Client::Client()
-{
+
+//-------------------------------- OTHERS -------------------------------------
 
 
+void Client::printClient(){
+    std::cout << "- Client : \n" << std::flush;
+    std::cout << "     nom : " << nom << "\n" << std::flush;
+    std::cout << "     prenom : " << prenom << "\n" << std::flush;
+    std::cout << "     adresse : " << adresse << "\n" << std::flush;
 }
-
