@@ -1,10 +1,9 @@
 #include "bus.h"
+#include "vehicule.h"
 
-Bus::Bus()
+Bus::Bus(std::string &immatriculation, std::string modele, int nbPlaces, bool estDispo, double prixJournee):
+    Vehicule(immatriculation, modele, estDispo, prixJournee), nbPlaces(nbPlaces)
 {
-
-}
-/*Bus::~Bus(){
 
 }
 
@@ -13,8 +12,8 @@ void Bus::setNbPlaces(int value)
     this->nbPlaces = value;
 }
 
-int Bus::getNbPlaces()
+int Bus::getNbPlaces() const
 {
     return this->nbPlaces;
-}*/
+}
 

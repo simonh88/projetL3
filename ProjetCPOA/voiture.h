@@ -2,15 +2,15 @@
 #define VOITURE_H
 #include "vehicule.h"
 
-class Voiture //: public Vehicule
+class Voiture : public Vehicule
 {
 private:
     int nbPlaces;
 public:
-    Voiture();
+    Voiture(std::string &immatriculation, std::string modele, int nbPlaces, bool estDispo, double prixJournee);
     //virtual ~Voiture();
-    //void setNbPlaces(int value);
-    //int getNbPlaces();
+    void setNbPlaces(const int value);
+    int getNbPlaces() const;
 };
 
 #endif // VOITURE_H

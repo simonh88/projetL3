@@ -10,7 +10,7 @@ private:
 public:
     LesVehicules();
     Vehicule getVehicule(int id) const;
-    void setVehicule(const Vehicule &c);
+    void setVehicule(const Vehicule c);
     int getSize() const;
 };
 

@@ -17,6 +17,7 @@ public:
     void addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse);
     void addLocation(Location loc);
     void afficherClients();
+    void afficherVehicules();
 };
 
 #endif // APPLICATION_H

@@ -2,15 +2,15 @@
 #define BUS_H
 #include "vehicule.h"
 
-class Bus //: public Vehicule
+class Bus : public Vehicule
 {
 private:
     int nbPlaces;
 public:
-    Bus();
+    Bus(std::string &immatriculation, std::string modele, int nbPlaces, bool estDispo, double prixJournee);
     //virtual ~Bus();
-    //void setNbPlaces(int value);
-    //int getNbPlaces();
+    void setNbPlaces(const int value);
+    int getNbPlaces() const;
 };
 
 #endif // BUS_H

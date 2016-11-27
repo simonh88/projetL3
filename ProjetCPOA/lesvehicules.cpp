@@ -13,7 +13,7 @@ Vehicule LesVehicules::getVehicule(int id) const
     return this->listVehicules.at(id);
 }
 
-void LesVehicules::setVehicule(const Vehicule &c)
+void LesVehicules::setVehicule(const Vehicule c)
 {
     this->listVehicules.push_back(c);
 }

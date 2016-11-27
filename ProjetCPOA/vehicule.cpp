@@ -1,4 +1,5 @@
 #include "vehicule.h"
+#include <iostream>
 
 std::string Vehicule::getModele() const
 {
@@ -10,7 +11,12 @@ void Vehicule::setModele(const std::string &value)
     modele = value;
 }
 
-Vehicule::Vehicule()
+
+Vehicule::Vehicule(){
+
+}
+
+Vehicule::Vehicule(std::string &immatriculation, std::string modele, bool estDispo, double prixJournee)
 {
 
 }
@@ -18,7 +24,6 @@ Vehicule::Vehicule()
 Vehicule::~Vehicule(){
 
 }
-
 
 
 std::string Vehicule::getUrlImage() const
@@ -59,5 +64,12 @@ void Vehicule::setImmatriculation(const std::string &value)
 void Vehicule::setEstDispo(bool value)
 {
     this->estDispo = value;
+}
+
+
+void Vehicule::printVehicule(){
+    std::cout << "- Vehicule : \n" << std::flush;
+    std::cout << "     immat :" << getImmatriculation() << "\n" << std::flush;
+    std::cout << "     modele : " << getModele() << "\n" << std::flush;
 }
 

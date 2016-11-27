@@ -2,10 +2,10 @@
 #define VELO_H
 #include "vehicule.h"
 
-class Velo //: public Vehicule
+class Velo : public Vehicule
 {
 public:
-    Velo();
+    Velo(std::string &immatriculation, std::string modele, bool estDispo, double prixJournee);
     //virtual ~Velo();
 };
 

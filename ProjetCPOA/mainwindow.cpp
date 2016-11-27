@@ -3,6 +3,11 @@
 #include "test.h"
 #include <iostream>
 #include "client.h"
+#include "vehicule.h"
+#include "voiture.h"
+#include "velo.h"
+#include "bus.h"
+#include "application.h"
 
 
 
@@ -21,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->valid_addClient, SIGNAL(clicked()), this, SLOT(valid_addClient()));
 
-    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
+    connect(ui->valid_addVehicule, SIGNAL(clicked()), this, SLOT(valid_addVehicule()));
+    connect(ui->choixTypeVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
 
 }
 
@@ -80,6 +86,9 @@ void MainWindow::valid_addClient(){
         //c.printClient();
         application.addClient(client_Nom, client_Prenom, client_Adresse);
         application.afficherClients();
+
+        //Redirection sur l'index acceuil a voir si on rajoute message ou non
+        ui->tabWidget->setCurrentIndex(0);
 ;    }
 
     //std::cout << naissance.toStdString() << std::flush;
@@ -90,6 +99,62 @@ void MainWindow::valid_addClient(){
 
 
 void MainWindow::valid_addVehicule(){
+    std::cout << "form addVeh\n\n" << std::flush;
+
+    QString immat = ui->add_vehImmat->toPlainText();
+    QString modele = ui->add_vehModele->toPlainText();
+    QDate dateCT = ui->add_vehCT->date();
+    int nbPlaces = ui->add_vehPlaces->value();
+    double prixJournee = ui->add_vehPrix->value();
+    bool assistElec = ui->add_vehAssistElec->isChecked();
+    int typeVeh = ui->choixTypeVeh->checkedId();
+    //bool estDispo = ui->add_ve --------------------------------------TODO A RAJOUTER
+
+    bool check = true;
+
+    if(immat.trimmed().isEmpty()) check = false;
+    if(modele.trimmed().isEmpty()) check = false;
+    if(prixJournee == 0.00) check = false;
+    std::string strImmatriculation = immat.toStdString();
+    std::string strModele = modele.toStdString();
+
+    switch(typeVeh)
+    {
+        case -3: //VOITURE
+         {
+            if(assistElec == NULL) check = false;
+            else{
+                std::cout << "form addVeh voiture ok\n\n" << std::flush;
+
+                Voiture v(strImmatriculation, strModele, nbPlaces, true, prixJournee);
+                application.addVehicule(v);
+            }
+            //Instanciation nouvelle voiture
+        }
+        break;
+        case -2: //BUS
+        {
+            std::cout << "form addVeh bus ok\n\n" << std::flush;
+            Bus b(strImmatriculation, strModele, nbPlaces, true, prixJournee);
+            application.addVehicule(b);
+        }
+        break;
+        case -4: //VELO
+        {
+            std::cout << "form addVeh velo ok\n\n" << std::flush;
+            Velo v(strImmatriculation, strModele, true, prixJournee);
+            application.addVehicule(v);
+        }
+        break;
+        default:
+        {
+            std::cout << "form addVeh choix veh a faire\n\n" << std::flush;
+            check = false;
+        }
+        break;
+    }
+
+   application.afficherVehicules();
 
 }
 

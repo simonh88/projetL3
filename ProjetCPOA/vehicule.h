@@ -5,7 +5,7 @@
 
 class Vehicule
 {
-private:
+protected:
     bool estDispo;
     std::string immatriculation;
     double prixJournee;
@@ -14,6 +14,7 @@ private:
 
 public:
     Vehicule();
+    Vehicule(std::string &immatriculation, std::string modele, bool estDispo, double prixJournee);
     virtual ~Vehicule();
     std::string getUrlImage() const;
     double getPrixJournee() const;
@@ -27,7 +28,7 @@ public:
     void setImmatriculation(const std::string &value);
     void setEstDispo(bool value);
     void setModele(const std::string &value);
-    //virtual void setNbPlaces(int value) = 0;
+    void printVehicule();
 };
 
 #endif // VEHICULE_H
