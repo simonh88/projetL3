@@ -122,13 +122,10 @@ void MainWindow::valid_addVehicule(){
     {
         case -3: //VOITURE
          {
-            if(assistElec == NULL) check = false;
-            else{
-                std::cout << "form addVeh voiture ok\n\n" << std::flush;
+            std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
-                Voiture v(strImmatriculation, strModele, nbPlaces, true, prixJournee);
-                application.addVehicule(v);
-            }
+            Voiture v(strImmatriculation, strModele, nbPlaces, true, prixJournee);
+            application.addVehicule(v);
             //Instanciation nouvelle voiture
         }
         break;
