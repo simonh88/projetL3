@@ -16,7 +16,7 @@ Vehicule::Vehicule(){
 
 }
 
-Vehicule::Vehicule(std::string &immatriculation, std::string modele, bool estDispo, double prixJournee)
+Vehicule::Vehicule(std::string immatriculation, std::string modele, bool estDispo, double prixJournee)
 {
 
 }

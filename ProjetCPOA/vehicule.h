@@ -14,7 +14,7 @@ protected:
 
 public:
     Vehicule();
-    Vehicule(std::string &immatriculation, std::string modele, bool estDispo, double prixJournee);
+    Vehicule(std::string immatriculation, std::string modele, bool estDispo, double prixJournee);
     virtual ~Vehicule();
     std::string getUrlImage() const;
     double getPrixJournee() const;
