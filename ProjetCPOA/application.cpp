@@ -33,7 +33,6 @@ void Application::afficherClients(){
 }
 
 void Application::afficherVehicules(){
-    std::cout << lesVehicules.getSize() << std::flush;
     for(int i = 0; i<lesVehicules.getSize(); i++){
         lesVehicules.getVehicule(i).printVehicule();
     }
