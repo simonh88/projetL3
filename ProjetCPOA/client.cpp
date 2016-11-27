@@ -13,7 +13,8 @@ Client::Client()
 }
 
 
-Client::Client(std::string &nom2, std::string &prenom2, std::string &adresse2): idClient(0), nom(nom2), prenom(prenom2), adresse(adresse2)
+
+Client::Client(int id, std::string &nom2, std::string &prenom2, std::string &adresse2): idClient(id), nom(nom2), prenom(prenom2), adresse(adresse2)
 {
 
 }
@@ -73,6 +74,7 @@ void Client::setIdClient(int value)
 
 void Client::printClient(){
     std::cout << "- Client : \n" << std::flush;
+    std::cout << "     id :" << idClient << "\n" << std::flush;
     std::cout << "     nom : " << nom << "\n" << std::flush;
     std::cout << "     prenom : " << prenom << "\n" << std::flush;
     std::cout << "     adresse : " << adresse << "\n" << std::flush;

@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     date.cpp \
     bus.cpp \
     voiture.cpp \
-    velo.cpp
+    velo.cpp \
+    application.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -38,6 +39,7 @@ HEADERS  += mainwindow.h \
     date.h \
     bus.h \
     voiture.h \
-    velo.h
+    velo.h \
+    application.h
 
 FORMS    += mainwindow.ui

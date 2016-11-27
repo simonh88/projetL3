@@ -1,5 +1,6 @@
 #include "lesvehicules.h"
 #include "vehicule.h"
+#include <vector>
 
 LesVehicules::LesVehicules()
 {

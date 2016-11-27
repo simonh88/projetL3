@@ -13,7 +13,7 @@ private:
 
 public:
     Client();
-    Client(std::string &nom, std::string &prenom, std::string &adresse);
+    Client(int id, std::string &nom, std::string &prenom, std::string &adresse);
 
     std::string getAdresse() const;
     std::string getPrenom() const;

@@ -75,10 +75,11 @@ void MainWindow::valid_addClient(){
         std::string client_Nom = nom.toStdString();
         std::string client_Prenom = prenom.toStdString();
         std::string client_Adresse = adresse.toStdString();
+        /*Client c(client_Nom, client_Prenom, client_Adresse);*/
 
-        Client c(client_Nom, client_Prenom, client_Adresse);
-
-        c.printClient();
+        //c.printClient();
+        application.addClient(client_Nom, client_Prenom, client_Adresse);
+        application.afficherClients();
 ;    }
 
     //std::cout << naissance.toStdString() << std::flush;

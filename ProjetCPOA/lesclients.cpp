@@ -5,7 +5,6 @@
 
 LesClients::LesClients()
 {
-
     //listClients.push_back("blabla");
 }
 
@@ -14,7 +13,7 @@ Client LesClients::getClient(int id) const
     return this->listClients.at(id);
 }
 
-void LesClients::setClient(const Client &c)
+void LesClients::setClient(const Client c)
 {
     this->listClients.push_back(c);
 }

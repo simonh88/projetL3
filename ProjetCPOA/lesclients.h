@@ -13,7 +13,7 @@ private:
 public:
     LesClients();
     Client getClient(int id) const;
-    void setClient(const Client &c);
+    void setClient(const Client c);
     int getSize() const;
 };
 
