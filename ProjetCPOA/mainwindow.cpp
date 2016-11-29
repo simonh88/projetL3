@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valid_addVehicule, SIGNAL(clicked()), this, SLOT(valid_addVehicule()));
     connect(ui->choixTypeVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
 
+    connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
+
 }
 
 MainWindow::~MainWindow()
@@ -37,7 +39,46 @@ MainWindow::~MainWindow()
 }
 
 
+
+//----------------------- REFRESH --------------------------------
+
+
+void MainWindow::refresh(){
+    this->refresh_ListVeh();
+    this->refresh_ListClient();
+}
+
+void MainWindow::refresh_ListVeh(){
+    QComboBox *listVeh = ui->add_locVehicule;
+
+    listVeh->clear();
+
+    for(int i=0; i<application.getVehiculesSize();i++){
+        Vehicule veh = application.getVehiculeById(i);
+        if(veh.getEstDispo()){
+            listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+        }
+    }
+}
+
+void MainWindow::refresh_ListClient(){
+    QComboBox *listClient = ui->add_locClient;
+
+    listClient->clear();
+
+    for(int i=0; i<application.getClientsSize();i++){
+        Client client = application.getClientById(i);
+
+        listClient->addItem(QString::fromStdString(client.getNom()+" "+client.getPrenom()), QString::number(client.getIdClient()));
+    }
+}
+
+
+
+
 //----------- VALIDATION FORMULAIRE CLIENT ------------------------
+
+
 
 
 void MainWindow::valid_addClient(){
@@ -95,7 +136,11 @@ void MainWindow::valid_addClient(){
 }
 
 
-//----------- VALIDATION FORMULAIRE CLIENT ------------------------
+
+
+//----------- VALIDATION FORMULAIRE VEHICULE ------------------------
+
+
 
 
 void MainWindow::valid_addVehicule(){
@@ -108,7 +153,7 @@ void MainWindow::valid_addVehicule(){
     double prixJournee = ui->add_vehPrix->value();
     bool assistElec = ui->add_vehAssistElec->isChecked();
     int typeVeh = ui->choixTypeVeh->checkedId();
-    //bool estDispo = ui->add_ve --------------------------------------TODO A RAJOUTER
+    bool estDispo = ui->add_vehDispo->isChecked();
 
     bool check = true;
 
@@ -124,7 +169,7 @@ void MainWindow::valid_addVehicule(){
          {
             std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
-            Voiture v(strImmatriculation, strModele, nbPlaces, true, prixJournee);
+            Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(v);
             //Instanciation nouvelle voiture
         }
@@ -132,14 +177,14 @@ void MainWindow::valid_addVehicule(){
         case -2: //BUS
         {
             std::cout << "form addVeh bus ok\n\n" << std::flush;
-            Bus b(strImmatriculation, strModele, nbPlaces, true, prixJournee);
+            Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(b);
         }
         break;
         case -4: //VELO
         {
             std::cout << "form addVeh velo ok\n\n" << std::flush;
-            Velo v(strImmatriculation, strModele, true, prixJournee);
+            Velo v(strImmatriculation, strModele, estDispo, prixJournee);
             application.addVehicule(v);
         }
         break;
@@ -152,6 +197,7 @@ void MainWindow::valid_addVehicule(){
     }
 
    application.afficherVehicules();
+   this->refresh();
 
 }
 
@@ -161,7 +207,7 @@ void MainWindow::select_typeVeh(int id){
     // id -4 : velo
 
     if(id==-3){
-        std::cout << "Voiture choisie\n" << std::flush;
+        //std::cout << "Voiture choisie\n" << std::flush;
         ui->add_vehModele->setEnabled(true);
         ui->add_vehImmat->setEnabled(true);
         ui->add_vehCT->setEnabled(true);
@@ -169,9 +215,10 @@ void MainWindow::select_typeVeh(int id){
         ui->add_vehPlaces->setEnabled(true);
         ui->add_vehDispo->setEnabled(true);
         ui->add_vehAssistElec->setEnabled(false);
+        ui->valid_addVehicule->setEnabled(true);
     }
     if(id==-2){
-        std::cout << "Bus choisi\n" << std::flush;
+        //std::cout << "Bus choisi\n" << std::flush;
         ui->add_vehModele->setEnabled(true);
         ui->add_vehImmat->setEnabled(true);
         ui->add_vehCT->setEnabled(true);
@@ -179,9 +226,10 @@ void MainWindow::select_typeVeh(int id){
         ui->add_vehPlaces->setEnabled(true);
         ui->add_vehDispo->setEnabled(true);
         ui->add_vehAssistElec->setEnabled(false);
+        ui->valid_addVehicule->setEnabled(true);
     }
     if(id==-4){
-        std::cout << "Vélo choisi\n" << std::flush;
+        //std::cout << "Vélo choisi\n" << std::flush;
         ui->add_vehModele->setEnabled(true);
         ui->add_vehImmat->setEnabled(true);
         ui->add_vehCT->setEnabled(false);
@@ -189,12 +237,50 @@ void MainWindow::select_typeVeh(int id){
         ui->add_vehPlaces->setEnabled(false);
         ui->add_vehDispo->setEnabled(true);
         ui->add_vehAssistElec->setEnabled(true);
+        ui->valid_addVehicule->setEnabled(true);
     }
 
     //std::cout << "c'est id : " << id << " qui a été cliqué\n" << std::flush;
 }
 
+
+
+
+//----------- VALIDATION FORMULAIRE LOCATION ------------------------
+
+
+
+
+void MainWindow::valid_addLocation(){
+    std::cout << "form addLocation\n\n" << std::flush;
+
+    int idClient = ui->add_locClient->currentData().toInt();
+    QString refBanq = ui->add_locRefBanq->toPlainText();
+    QDate dateDebut = ui->add_locDateDebut->date();
+    int duree = ui->add_locDuree->value();
+    //int typeVeh = ui->choixTypeVeh->checkedId();
+    bool assist = ui->add_locAssist->isChecked();
+    QString immatVeh = ui->add_locVehicule->currentData().toString();
+
+    std::string strDate = dateDebut.toString().toStdString();
+
+    std::cout << "LOCATION\n" << std::flush;
+    std::cout << "idCLient : " << idClient << "\n" << std::flush;
+    std::cout << "refBanq : " << refBanq.toStdString() << "\n" << std::flush;
+    std::cout << "dateDebut : " << strDate << "\n" << std::flush;
+    std::cout << "duree : " << duree << "\n" << std::flush;
+    //std::cout << "typeVeh : " << typeVeh << "\n" << std::flush;
+    std::cout << "assist ? : " << assist << "\n" << std::flush;
+    std::cout << "immateVeh : " << immatVeh.toStdString() << "\n" << std::flush;
+}
+
+
+
+
 //----------- LIENS ENTRE BOUTONS ET ONGLETS ------------------------
+
+
+
 
 
 void MainWindow::form_addClient(){

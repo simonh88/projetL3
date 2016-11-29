@@ -21,9 +21,11 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
 
 }
 
-void Application::addLocation(Location loc)
+void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
 {
-
+    int id = lesLocations.getSize();
+    Location l(id, loc_idClient, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, loc_immatVeh);
+    //lesClients.setClient(c);
 }
 
 void Application::afficherClients(){
@@ -33,8 +35,24 @@ void Application::afficherClients(){
 }
 
 void Application::afficherVehicules(){
+    std::cout << "\n\n      - LISTE VEHICULES :\n" << std::flush;
     for(int i = 0; i<lesVehicules.getSize(); i++){
         lesVehicules.getVehicule(i).printVehicule();
     }
 }
 
+int Application::getVehiculesSize(){
+    return lesVehicules.getSize();
+}
+
+Vehicule Application::getVehiculeById(int id){
+    return lesVehicules.getVehicule(id);
+}
+
+int Application::getClientsSize(){
+    return lesClients.getSize();
+}
+
+Client Application::getClientById(int id){
+    return lesClients.getClient(id);
+}

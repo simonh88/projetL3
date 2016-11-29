@@ -27,6 +27,9 @@ Vehicule::~Vehicule(){
 }
 
 
+//-------------------------------- GETTERS --------------------------------------
+
+
 std::string Vehicule::getUrlImage() const
 {
     return this->urlImage;
@@ -46,6 +49,15 @@ bool Vehicule::getEstDispo() const
 {
     return this->estDispo;
 }
+
+std::string Vehicule::getType() const
+{
+    return this->type;
+}
+
+
+//-------------------------------- SETTERS --------------------------------------
+
 
 void Vehicule::setUrlImage(const std::string &value)
 {
@@ -67,10 +79,17 @@ void Vehicule::setEstDispo(bool value)
     this->estDispo = value;
 }
 
+void Vehicule::setType(const std::string &value)
+{
+    this->type = value;
+}
+
 
 void Vehicule::printVehicule(){
-    std::cout << "- Vehicule : \n" << std::flush;
-    std::cout << "     immat :" << getImmatriculation() << "\n" << std::flush;
+    std::cout << "- " << getType() << " : \n" << std::flush;
+    std::cout << "     immat : " << getImmatriculation() << "\n" << std::flush;
     std::cout << "     modele : " << getModele() << "\n" << std::flush;
+    std::cout << "     dispo ? : " << getEstDispo() << "\n" << std::flush;
+    std::cout << "     prixJournee : " << getPrixJournee() << "\n" << std::flush;
 }
 

@@ -4,7 +4,7 @@
 Bus::Bus(std::string immatriculation, std::string modele, int nbPlaces, bool estDispo, double prixJournee):
     Vehicule(immatriculation, modele, estDispo, prixJournee), nbPlaces(nbPlaces)
 {
-
+    this->type = "Bus";
 }
 
 void Bus::setNbPlaces(int value)

@@ -2,9 +2,24 @@
 #include <string>
 
 
-Location::Location(int idLoc)
+Location::Location(int &id, int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
 {
-    idLocation = idLoc;
+    idLocation = id;
+    modePaiement = loc_refBanq;
+
+    //TODO
+    //str Date to QDate
+    // dateFin QDate (datedebut + duree)
+    // prix a calculer et reucprer dans application
+    // vehic recup veh by immat
+    // cli recup by id
+
+    /*dateDebut = loc_DateDebut;
+    dateFin = loc_DateDebut + loc_Duree;
+    prix = 0;
+    vehic = loc_immatVeh;
+    cli = loc_idClient;*/
+
 }
 
 Vehicule Location::getVehic() const

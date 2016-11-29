@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>5</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -503,6 +503,9 @@
       </property>
      </widget>
      <widget class="QPushButton" name="valid_addVehicule">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>264</x>
@@ -1066,7 +1069,7 @@
        <string>Véhicule :</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="add_locClient_2">
+     <widget class="QComboBox" name="add_locVehicule">
       <property name="geometry">
        <rect>
         <x>370</x>

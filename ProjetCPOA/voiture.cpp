@@ -2,9 +2,9 @@
 #include "string.h"
 
 Voiture::Voiture(std::string immatriculation, std::string modele, int nbPlaces, bool estDispo, double prixJournee):
-    Vehicule::Vehicule(immatriculation, modele , prixJournee, estDispo), nbPlaces(nbPlaces)
+    Vehicule::Vehicule(immatriculation, modele, estDispo, prixJournee), nbPlaces(nbPlaces)
 {
-
+    this->type = "Voiture";
 }
 /*Voiture::~Voiture(){
 

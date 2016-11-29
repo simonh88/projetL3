@@ -28,10 +28,16 @@ private slots :
     void form_addParc();
     void form_addLocation();
 
+    void refresh();
+    void refresh_ListVeh();
+    void refresh_ListClient();
+
     void valid_addClient();
 
     void valid_addVehicule();
     void select_typeVeh(int id);
+
+    void valid_addLocation();
 };
 
 #endif // MAINWINDOW_H

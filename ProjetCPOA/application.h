@@ -15,9 +15,14 @@ public:
     Application();
     void addVehicule(Vehicule veh);
     void addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse);
-    void addLocation(Location loc);
+    void addLocation(int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh);
     void afficherClients();
     void afficherVehicules();
+
+    int getVehiculesSize();
+    Vehicule getVehiculeById(int id);
+    int getClientsSize();
+    Client getClientById(int id);
 };
 
 #endif // APPLICATION_H

@@ -74,7 +74,7 @@ void Client::setIdClient(int value)
 
 void Client::printClient(){
     std::cout << "- Client : \n" << std::flush;
-    std::cout << "     id :" << idClient << "\n" << std::flush;
+    std::cout << "     id : " << idClient << "\n" << std::flush;
     std::cout << "     nom : " << nom << "\n" << std::flush;
     std::cout << "     prenom : " << prenom << "\n" << std::flush;
     std::cout << "     adresse : " << adresse << "\n" << std::flush;

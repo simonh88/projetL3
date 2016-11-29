@@ -18,7 +18,7 @@ private:
     Client cli;
 
 public:
-    Location(int idLoc);
+    Location(int &id, int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh);
     Vehicule getVehic() const;
     void setVehic(const Vehicule &value);
     int getIdLocation() const;
