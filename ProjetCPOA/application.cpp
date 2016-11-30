@@ -39,6 +39,13 @@ void Application::addParc(Parc parc)
     afficherParcs();
 }
 
+void Application::addChauffeur(Chauffeur chauffeur)
+{
+    lesChauffeurs.addChauffeur(chauffeur);
+
+    afficherChauffeurs();
+}
+
 void Application::afficherClients(){
     for(int i = 0; i<lesClients.getSize(); i++){
         lesClients.getClient(i).printClient();
@@ -49,6 +56,14 @@ void Application::afficherVehicules(){
     std::cout << "\n\n      - LISTE VEHICULES :\n" << std::flush;
     for(int i = 0; i<lesVehicules.getSize(); i++){
         lesVehicules.getVehicule(i).printVehicule();
+    }
+}
+
+void Application::afficherChauffeurs()
+{
+    std::cout << "\n\n      - LISTE CHAUFFEURS :\n" << std::flush;
+    for(int i = 0; i<lesChauffeurs.getSize(); i++){
+        lesChauffeurs.getChauffeur(i).printChauffeur();
     }
 }
 

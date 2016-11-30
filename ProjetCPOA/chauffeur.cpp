@@ -2,7 +2,8 @@
 #include <string>
 #include <iostream>
 
-Chauffeur::Chauffeur()
+Chauffeur::Chauffeur(std::string &noPermis, std::string &nom, std::string &prenom, bool &estDispo): noPermis(noPermis),
+    nom(nom), prenom(prenom), estDispo(estDispo)
 {
 
 }
@@ -20,7 +21,7 @@ std::string Chauffeur::getPrenom() const{
     return prenom;
 }
 
-int Chauffeur::getNoPermis() const{
+std::string Chauffeur::getNoPermis() const{
     return noPermis;
 }
 
@@ -33,11 +34,11 @@ void Chauffeur::setPrenom(const std::string &value){
 }
 
 
-void Chauffeur::setDispo(bool value){
+void Chauffeur::setDispo(bool &value){
     estDispo = value;
 }
 
-void Chauffeur::setPermis(int value){
+void Chauffeur::setPermis(std::string &value){
     noPermis = value;
 }
 

@@ -9,6 +9,7 @@
 #include "bus.h"
 #include "application.h"
 #include "parc.h"
+#include "chauffeur.h"
 
 
 
@@ -35,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
     connect(ui->valid_addParc, SIGNAL(clicked()), this, SLOT(valid_addParc()));
-
+    connect(ui->valid_addChauffeur, SIGNAL(clicked()), this, SLOT(valid_addChauffeur()));
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +90,44 @@ void MainWindow::refresh_ListClient(){
     }
 }
 
+//----------- VALIDATION FORMULAIRE CHAUFFEUR --------------------
+void MainWindow::valid_addChauffeur(){
+    QString nom = ui->add_chauffeurNom->toPlainText();
+    QString prenom = ui->add_chauffeurPrenom->toPlainText();
+    //QString adresse = ui->add_chauffeurAdresse->toPlainText();
+    //QString mail = ui->add_chauffeurMail->toPlainText();
+    //QString = ui->add_chauffeurNaissance
+    bool dispo = ui->add_chauffeurDispo->isChecked();
+    QString permis = ui->add_chauffeurPermis->toPlainText();
+
+    bool check = true;
+    if(nom.trimmed().isEmpty()){
+        check = false;
+    }
+    if(prenom.trimmed().isEmpty()){
+        check = false;
+    }
+    if(permis.trimmed().isEmpty()){
+        check = false;
+    }
+
+    if(check){
+        std::string nomstr = nom.toStdString();
+        std::string prenomstr = prenom.toStdString();
+        std::string permisstr = permis.toStdString();
+
+    //std::cout << "Dispo :  "<< dispo << std::flush;
+        Chauffeur chauffeur(permisstr, nomstr, prenomstr, dispo);
+        application.addChauffeur(chauffeur);
+
+        ui->add_chauffeurMail->setText("");
+        ui->add_chauffeurAdresse->setText("");
+        ui->add_chauffeurNom->setText("");
+        ui->add_chauffeurPrenom->setText("");
+        ui->add_chauffeurPermis->setText("");
+    }
+
+}
 
 
 //----------- VALIDATION FORMULAIRE PARC -------------------------

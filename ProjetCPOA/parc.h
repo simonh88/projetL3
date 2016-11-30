@@ -4,7 +4,6 @@
 
 class Parc
 {
-
 private:
     std::string nom;
     std::string adresse;

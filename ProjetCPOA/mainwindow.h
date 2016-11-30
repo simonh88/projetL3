@@ -16,9 +16,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-public slots:
-    void valid_addParc();
 private:
     Ui::MainWindow *ui;
     Application application;
@@ -37,6 +34,8 @@ private slots :
     void refresh_ListClient();
 
     void valid_addClient();
+    void valid_addParc();
+    void valid_addChauffeur();
 
     void valid_addVehicule();
     void select_typeVeh(int id);
