@@ -16,9 +16,10 @@ private:
     Date dateFin;
     Vehicule vehic;
     Client cli;
+    bool assistance;
 
 public:
-    Location(int &id, int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh);
+    Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule &vehicule);
     Vehicule getVehic() const;
     void setVehic(const Vehicule &value);
     int getIdLocation() const;

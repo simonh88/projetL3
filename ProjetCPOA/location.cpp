@@ -2,16 +2,19 @@
 #include <string>
 #include "date.h"
 
-Location::Location(int &id, int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
+Location::Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule &vehicule)
 {
     idLocation = id;
     modePaiement = loc_refBanq;
+    dateDebut = loc_DateDebut;
+    dateFin = dateDebut.ajouter(loc_Duree);
+    vehic = vehicule;
+    cli = client;
+    prix = vehicule.getPrixJournee()*loc_Duree;
+    assistance = loc_assist;
 
     //TODO
-    //str Date to QDate
-    // dateFin QDate (datedebut + duree)
     // prix a calculer et reucprer dans application
-    // vehic recup veh by immat
     // cli recup by id
 
     /*dateDebut = loc_DateDebut;

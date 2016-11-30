@@ -12,6 +12,7 @@ public:
     Vehicule getVehicule(int id) const;
     void setVehicule(const Vehicule c);
     int getSize() const;
+    Vehicule getVehiculeByImmat(std::string immat);
 };
 
 #endif // LESVEHICULES_H

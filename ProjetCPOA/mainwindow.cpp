@@ -280,6 +280,7 @@ void MainWindow::valid_addLocation(){
 
     std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
     Date d(strDate);
+    application.addLocation(idClient, refBanq, d, duree, assist, immatVeh);
 
     std::cout << "LOCATION\n" << std::flush;
     std::cout << "idCLient : " << idClient << "\n" << std::flush;
