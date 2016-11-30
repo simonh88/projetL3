@@ -1,5 +1,6 @@
 #include "parc.h"
 #include <string>
+#include <iostream>
 
 Parc::Parc()
 {

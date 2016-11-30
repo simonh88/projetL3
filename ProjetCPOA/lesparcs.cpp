@@ -11,7 +11,7 @@ Parc LesParcs::getParc(int id){
 }
 
 int LesParcs::getSize(){
-    return this->listLocation.size();
+    return this->listParc.size();
 }
 
 void LesParcs::addParc(const Parc &p){

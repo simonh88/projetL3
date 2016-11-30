@@ -1,6 +1,7 @@
 #ifndef LESCHAUFFEURS_H
 #define LESCHAUFFEURS_H
 #include <vector>
+#include "chauffeur.h"
 
 class LesChauffeurs
 {

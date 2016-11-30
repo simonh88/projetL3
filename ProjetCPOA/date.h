@@ -21,6 +21,7 @@ public:
     void setJour(int value);
     int compare(Date d);
     Date();
+    Date ajouter(int duree);
 };
 
 #endif // DATE_H

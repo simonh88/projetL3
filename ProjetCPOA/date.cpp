@@ -57,7 +57,38 @@ int Date::compare(Date d)
     return res;
 }
 
-
+Date Date::ajouter(int duree){
+    int jours = this->getJour()+duree;
+    int nbJoursMois = 0;
+    bool bissextile = false;
+    if(getAnnee() % 4 == 0 && getAnnee() % 100 != 0 || getAnnee() % 400 == 0){
+        bissextile = true;
+    }
+    Date d("0/00/0000");
+    switch(getMois()){
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            nbJoursMois = 31;
+        break;
+        case 4: case 6: case 9: case 11:
+            nbJoursMois = 30;
+        break;
+        case 2:
+            if(bissextile) nbJoursMois = 29;
+            else nbJoursMois = 28;
+        break;
+    }
+    if(jours > nbJoursMois){
+        d.setMois(getMois()+1);
+        d.setJour(jours - nbJoursMois);
+        if(d.getMois() > 12){
+            d.setAnnee(getAnnee()+1);
+            d.setMois(1);
+        }else{
+            d.setAnnee(getAnnee());
+        }
+    }
+    return d;
+}
 
 void Date::split(std::string str, char delimiter) {
   std::stringstream ss(str); // Turn the string into a stream.
