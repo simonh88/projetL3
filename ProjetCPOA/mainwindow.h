@@ -20,6 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
     Application application;
+    std::vector<std::string> split(std::string, char delimiter);
 
 private slots :
     void form_addClient();

@@ -1,6 +1,8 @@
 #ifndef DATE_H
 #define DATE_H
-
+#include <iostream>
+#include <string>
+#include <sstream>
 
 class Date
 {
@@ -8,8 +10,9 @@ private:
     int jour;
     int mois;
     int annee;
+    void split(std::string str, char delimiter);
 public:
-    Date();
+    Date(std::string dateStr);
     int getJour() const;
     int getMois() const;
     int getAnnee() const;
@@ -17,6 +20,7 @@ public:
     void setMois(int value);
     void setJour(int value);
     int compare(Date d);
+    Date();
 };
 
 #endif // DATE_H

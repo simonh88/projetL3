@@ -1,8 +1,8 @@
 #include "location.h"
 #include <string>
+#include "date.h"
 
-
-Location::Location(int &id, int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
+Location::Location(int &id, int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
 {
     idLocation = id;
     modePaiement = loc_refBanq;

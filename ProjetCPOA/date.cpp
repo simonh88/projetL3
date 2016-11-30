@@ -1,4 +1,5 @@
 #include "date.h"
+#include <stdlib.h>
 
 int Date::getJour() const
 {
@@ -56,8 +57,25 @@ int Date::compare(Date d)
     return res;
 }
 
+
+
+void Date::split(std::string str, char delimiter) {
+  std::stringstream ss(str); // Turn the string into a stream.
+  std::string tok;
+  getline(ss, tok, delimiter);
+  jour = atoi(tok.c_str());
+  getline(ss, tok, delimiter);
+  mois = atoi(tok.c_str());
+  getline(ss, tok, delimiter);
+  annee = atoi(tok.c_str());
+}
+
 Date::Date()
 {
+}
 
+Date::Date(std::string dateStr)
+{
+    split(dateStr, '/');
 }
 

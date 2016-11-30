@@ -15,13 +15,12 @@ void Application::addVehicule(Vehicule veh)
 
 void Application::addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse)
 {
-    int id = lesClients.getSize();
+    int id = lesClients.getSize()+1;
     Client c(id, client_Nom, client_Prenom, client_Adresse);
     lesClients.setClient(c);
-
 }
 
-void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, std::string &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
+void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
 {
     int id = lesLocations.getSize();
     Location l(id, loc_idClient, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, loc_immatVeh);

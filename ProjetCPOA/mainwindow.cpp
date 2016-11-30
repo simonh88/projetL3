@@ -130,6 +130,7 @@ void MainWindow::valid_addClient(){
 
         //Redirection sur l'index acceuil a voir si on rajoute message ou non
         ui->tabWidget->setCurrentIndex(0);
+        this->refresh();
 ;    }
 
     //std::cout << naissance.toStdString() << std::flush;
@@ -262,7 +263,23 @@ void MainWindow::valid_addLocation(){
     bool assist = ui->add_locAssist->isChecked();
     QString immatVeh = ui->add_locVehicule->currentData().toString();
 
-    std::string strDate = dateDebut.toString().toStdString();
+    bool check = true;
+
+    if(refBanq.trimmed().isEmpty()){
+        check = false;
+    }
+    if(immatVeh.trimmed().isEmpty()){
+        check = false;
+    }
+    if(idClient == 0){
+        check = false;
+    }
+    if(duree == 0){
+        check = false;
+    }
+
+    std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
+    Date d(strDate);
 
     std::cout << "LOCATION\n" << std::flush;
     std::cout << "idCLient : " << idClient << "\n" << std::flush;
