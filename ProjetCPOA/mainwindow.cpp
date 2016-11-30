@@ -269,7 +269,7 @@ void MainWindow::select_typeVeh(int id){
 void MainWindow::valid_addLocation(){
     std::cout << "form addLocation\n\n" << std::flush;
 
-    int idClient = ui->add_locClient->currentData().toInt();
+    int idClient = ui->add_locClient->currentData().toInt()-1;
     QString refBanq = ui->add_locRefBanq->toPlainText();
     QDate dateDebut = ui->add_locDateDebut->date();
     int duree = ui->add_locDuree->value();
@@ -294,7 +294,9 @@ void MainWindow::valid_addLocation(){
 
     std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
     Date d(strDate);
-    application.addLocation(idClient, refBanq, d, duree, assist, immatVeh);
+    std::string refBanqstr = refBanq.toStdString();
+    std::string immatVehstr = immatVeh.toStdString();
+    application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
 
     std::cout << "LOCATION\n" << std::flush;
     std::cout << "idCLient : " << idClient << "\n" << std::flush;

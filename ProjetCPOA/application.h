@@ -23,6 +23,7 @@ public:
     Vehicule getVehiculeById(int id);
     int getClientsSize();
     Client getClientById(int id);
+    void afficherLocations();
 };
 
 #endif // APPLICATION_H

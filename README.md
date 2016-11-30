@@ -1,9 +1,7 @@
 # projetL3
 Projet C++ module CPOA
 
-enregistrement Location dans appli
-
-
+Refresh en fonction du type de vehicules
 
 Ajouter un parc
 Ajouter un chauffeur

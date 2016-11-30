@@ -32,6 +32,7 @@ public:
     void setDateFin(const Date &value);
     Client getCli() const;
     void setCli(const Client &value);
+    void printLocation();
 };
 
 #endif // LOCATION_H

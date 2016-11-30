@@ -85,5 +85,16 @@ void Location::setCli(const Client &value)
     cli = value;
 }
 
+void Location::printLocation(){
+    std::cout << "LOCATION : " << idLocation <<  "\n" << std::flush;
+    std::cout << "idCLient : " << cli.getNom() << "\n" << std::flush;
+    std::cout << "refBanq : " << modePaiement << "\n" << std::flush;
+    //std::cout << "dateDebut : " <<  << "\n" << std::flush;
+    //std::cout << "duree : " << duree << "\n" << std::flush;
+    //std::cout << "typeVeh : " << typeVeh << "\n" << std::flush;
+    std::cout << "assist ? : " << assistance << "\n" << std::flush;
+    std::cout << "immateVeh : " << vehic.getModele() << "\n" << std::flush;
+}
+
 
 

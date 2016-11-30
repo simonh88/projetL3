@@ -26,6 +26,9 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
     Vehicule v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
     Client c = lesClients.getClient(loc_idClient);
     Location l(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
+    lesLocations.addLocation(l);
+
+    afficherLocations();
     //lesClients.setClient(c);
 }
 
@@ -39,6 +42,12 @@ void Application::afficherVehicules(){
     std::cout << "\n\n      - LISTE VEHICULES :\n" << std::flush;
     for(int i = 0; i<lesVehicules.getSize(); i++){
         lesVehicules.getVehicule(i).printVehicule();
+    }
+}
+
+void Application::afficherLocations(){
+    for(int i = 0; i<lesLocations.getSize(); i++){
+        lesLocations.getLocation(i).printLocation();
     }
 }
 
