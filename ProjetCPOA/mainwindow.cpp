@@ -128,6 +128,12 @@ void MainWindow::valid_addClient(){
         application.addClient(client_Nom, client_Prenom, client_Adresse);
         application.afficherClients();
 
+        ui->add_clientNom->setText("");
+        ui->add_clientPrenom->setText("");
+        ui->add_clientAdresse->setText("");
+        ui->add_clientMail->setText("");
+        ui->add_clientPermis->setText("");
+
         //Redirection sur l'index acceuil a voir si on rajoute message ou non
         ui->tabWidget->setCurrentIndex(0);
         this->refresh();
@@ -172,6 +178,7 @@ void MainWindow::valid_addVehicule(){
 
             Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(v);
+
             //Instanciation nouvelle voiture
         }
         break;
@@ -180,6 +187,7 @@ void MainWindow::valid_addVehicule(){
             std::cout << "form addVeh bus ok\n\n" << std::flush;
             Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(b);
+
         }
         break;
         case -4: //VELO
@@ -187,6 +195,7 @@ void MainWindow::valid_addVehicule(){
             std::cout << "form addVeh velo ok\n\n" << std::flush;
             Velo v(strImmatriculation, strModele, estDispo, prixJournee);
             application.addVehicule(v);
+
         }
         break;
         default:
@@ -198,6 +207,12 @@ void MainWindow::valid_addVehicule(){
     }
 
    application.afficherVehicules();
+   ui->add_vehModele->setText("");
+   ui->add_vehImmat->setText("");
+   ui->add_vehPlaces->setValue(0);
+   ui->add_vehPrix->setValue(0);
+
+
    this->refresh();
 
 }
@@ -240,7 +255,6 @@ void MainWindow::select_typeVeh(int id){
         ui->add_vehAssistElec->setEnabled(true);
         ui->valid_addVehicule->setEnabled(true);
     }
-
     //std::cout << "c'est id : " << id << " qui a été cliqué\n" << std::flush;
 }
 
