@@ -17,10 +17,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void valid_addParc();
 private:
     Ui::MainWindow *ui;
     Application application;
-    bool estSurLocation;
     std::vector<std::string> split(std::string, char delimiter);
 
 

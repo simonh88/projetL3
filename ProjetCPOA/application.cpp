@@ -32,6 +32,13 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
     //lesClients.setClient(c);
 }
 
+void Application::addParc(Parc parc)
+{
+    lesParcs.addParc(parc);
+
+    afficherParcs();
+}
+
 void Application::afficherClients(){
     for(int i = 0; i<lesClients.getSize(); i++){
         lesClients.getClient(i).printClient();
@@ -52,6 +59,15 @@ void Application::afficherLocations(){
     }
 }
 
+void Application::afficherParcs(){
+    std::cout << "\n\n      - LISTE PARCS :\n" << std::flush;
+    for(int i = 0; i<lesParcs.getSize(); i++){
+        lesParcs.getParc(i).printParc();
+    }
+}
+
+
+ //==========================INUTILE======================================//
 int Application::getVehiculesSize(){
     return lesVehicules.getSize();
 }

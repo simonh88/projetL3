@@ -8,6 +8,7 @@
 #include "velo.h"
 #include "bus.h"
 #include "application.h"
+#include "parc.h"
 
 
 
@@ -15,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    estSurLocation = false;
     ui->setupUi(this);
     connect(ui->btn_addClient, SIGNAL(clicked()), this, SLOT(form_addClient()));
     connect(ui->btn_addClient2, SIGNAL(clicked()), this, SLOT(form_addClient()));
@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
+    connect(ui->valid_addParc, SIGNAL(clicked()), this, SLOT(valid_addParc()));
 
 }
 
@@ -89,6 +90,31 @@ void MainWindow::refresh_ListClient(){
 }
 
 
+
+//----------- VALIDATION FORMULAIRE PARC -------------------------
+
+void MainWindow::valid_addParc(){
+    QString nom = ui->add_parcNom->toPlainText();
+    QString adresse = ui->add_parcAdresse->toPlainText();
+    int nbPlaces = ui->add_parcPlaces->value();
+
+    bool check = true;
+    if(nom.trimmed().isEmpty()){
+        check = false;
+    }
+    if(adresse.trimmed().isEmpty()){
+        check = false;
+    }
+
+    if(check){
+        std::string nomstr = nom.toStdString();
+        std::string adressestr = adresse.toStdString();
+        Parc parc(nomstr, adressestr, nbPlaces);
+
+        application.addParc(parc);
+    }
+
+}
 
 
 //----------- VALIDATION FORMULAIRE CLIENT ------------------------
@@ -152,7 +178,7 @@ void MainWindow::valid_addClient(){
         //Redirection sur l'index acceuil a voir si on rajoute message ou non
         ui->tabWidget->setCurrentIndex(0);
         this->refresh();
-;    }
+    }
 
     //std::cout << naissance.toStdString() << std::flush;
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-Parc::Parc()
+Parc::Parc(std::string &nom, std::string &adresse, int &nbPlaces): nom(nom), adresse(adresse), nbPlaces(nbPlaces)
 {
 
 }

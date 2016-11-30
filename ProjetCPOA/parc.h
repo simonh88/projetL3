@@ -11,7 +11,7 @@ private:
     int nbPlaces;
 
 public:
-    Parc();
+    Parc(std::string &nom, std::string &adresse, int &nbPlaces);
 
     std::string getNom() const;
     std::string getAdresse() const;
