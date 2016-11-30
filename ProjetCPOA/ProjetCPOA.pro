@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     bus.cpp \
     voiture.cpp \
     velo.cpp \
-    application.cpp
+    application.cpp \
+    lesparcs.cpp \
+    parc.cpp \
+    leschauffeurs.cpp \
+    chauffeur.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -40,6 +44,10 @@ HEADERS  += mainwindow.h \
     bus.h \
     voiture.h \
     velo.h \
-    application.h
+    application.h \
+    lesparcs.h \
+    parc.h \
+    leschauffeurs.h \
+    chauffeur.h
 
 FORMS    += mainwindow.ui
