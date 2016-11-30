@@ -20,7 +20,9 @@ public:
 private:
     Ui::MainWindow *ui;
     Application application;
+    bool estSurLocation;
     std::vector<std::string> split(std::string, char delimiter);
+
 
 private slots :
     void form_addClient();
@@ -30,13 +32,14 @@ private slots :
     void form_addLocation();
 
     void refresh();
-    void refresh_ListVeh();
+    void refresh_ListVeh(std::string typeVehicule);
     void refresh_ListClient();
 
     void valid_addClient();
 
     void valid_addVehicule();
     void select_typeVeh(int id);
+    void select_locVeh(int id);
 
     void valid_addLocation();
 };

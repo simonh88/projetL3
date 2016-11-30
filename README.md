@@ -1,20 +1,12 @@
 # projetL3
 Projet C++ module CPOA
 
-Refresh en fonction du type de vehicules
 
 Ajouter un parc
 Ajouter un chauffeur
 	=>Ajouter dans vehicule choix attachement a un parc
 
 
-
-
-
-
-
-
-Vider les champs après validation(ajout client)
 
 
 

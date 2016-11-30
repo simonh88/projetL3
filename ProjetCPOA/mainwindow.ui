@@ -1003,6 +1003,9 @@
       <property name="text">
        <string>&amp;Voiture</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">choixLocVeh</string>
+      </attribute>
      </widget>
      <widget class="QRadioButton" name="add_locBus">
       <property name="geometry">
@@ -1016,6 +1019,9 @@
       <property name="text">
        <string>&amp;Bus</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">choixLocVeh</string>
+      </attribute>
      </widget>
      <widget class="QRadioButton" name="add_locVelo">
       <property name="geometry">
@@ -1029,6 +1035,9 @@
       <property name="text">
        <string>Vélo</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">choixLocVeh</string>
+      </attribute>
      </widget>
      <widget class="QLabel" name="label_39">
       <property name="geometry">
@@ -1101,5 +1110,6 @@
  <connections/>
  <buttongroups>
   <buttongroup name="choixTypeVeh"/>
+  <buttongroup name="choixLocVeh"/>
  </buttongroups>
 </ui>

@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    estSurLocation = false;
     ui->setupUi(this);
     connect(ui->btn_addClient, SIGNAL(clicked()), this, SLOT(form_addClient()));
     connect(ui->btn_addClient2, SIGNAL(clicked()), this, SLOT(form_addClient()));
@@ -27,7 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valid_addClient, SIGNAL(clicked()), this, SLOT(valid_addClient()));
 
     connect(ui->valid_addVehicule, SIGNAL(clicked()), this, SLOT(valid_addVehicule()));
+    //---------Attachement des fonctions aux groupes de boutons---------/
     connect(ui->choixTypeVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
+    connect(ui->choixLocVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_locVeh(int)));
+
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
 
@@ -44,11 +48,18 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::refresh(){
-    this->refresh_ListVeh();
+    this->refresh_ListVeh("");
     this->refresh_ListClient();
 }
 
-void MainWindow::refresh_ListVeh(){
+//Si on envoi null au type de vehicule alors on ajoute tout les vehicules
+//Sinon c'est soit Velo soit Bus soit Voiture
+//Attention aux majs
+void MainWindow::refresh_ListVeh(std::string typeVehicule){
+    //Vehicule = 0 TOUT LES VEHICULES
+    //Vehicule = 1 VOITURES
+    //Vehicule = 2 BUS
+    //Vehicule = 3 VELO
     QComboBox *listVeh = ui->add_locVehicule;
 
     listVeh->clear();
@@ -56,7 +67,11 @@ void MainWindow::refresh_ListVeh(){
     for(int i=0; i<application.getVehiculesSize();i++){
         Vehicule veh = application.getVehiculeById(i);
         if(veh.getEstDispo()){
-            listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+           if(typeVehicule.empty()){
+               listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+           }else if(veh.getType().compare(typeVehicule) == 0){
+               listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+           }
         }
     }
 }
@@ -212,9 +227,26 @@ void MainWindow::valid_addVehicule(){
    ui->add_vehPlaces->setValue(0);
    ui->add_vehPrix->setValue(0);
 
-
    this->refresh();
 
+}
+
+void MainWindow::select_locVeh(int id){
+    //std::cout << id <<std::flush;
+    // id -2 : Voiture
+    // id -3 : Bus
+    // id -4 : Vélo
+    switch(id){
+    case -2://Voiture
+        refresh_ListVeh("Voiture");
+        break;
+    case -3://Bus
+        refresh_ListVeh("Bus");
+        break;
+    case -4://Vélo
+        refresh_ListVeh("Velo");
+        break;
+    }
 }
 
 void MainWindow::select_typeVeh(int id){
@@ -298,14 +330,6 @@ void MainWindow::valid_addLocation(){
     std::string immatVehstr = immatVeh.toStdString();
     application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
 
-    std::cout << "LOCATION\n" << std::flush;
-    std::cout << "idCLient : " << idClient << "\n" << std::flush;
-    std::cout << "refBanq : " << refBanq.toStdString() << "\n" << std::flush;
-    std::cout << "dateDebut : " << strDate << "\n" << std::flush;
-    std::cout << "duree : " << duree << "\n" << std::flush;
-    //std::cout << "typeVeh : " << typeVeh << "\n" << std::flush;
-    std::cout << "assist ? : " << assist << "\n" << std::flush;
-    std::cout << "immateVeh : " << immatVeh.toStdString() << "\n" << std::flush;
 }
 
 
@@ -340,6 +364,5 @@ void MainWindow::form_addParc(){
 }
 
 void MainWindow::form_addLocation(){
-
     ui->tabWidget->setCurrentIndex(5);
 }

@@ -46,6 +46,7 @@ void Application::afficherVehicules(){
 }
 
 void Application::afficherLocations(){
+    std::cout << "\n\n      - LISTE LOCATIONS :\n" << std::flush;
     for(int i = 0; i<lesLocations.getSize(); i++){
         lesLocations.getLocation(i).printLocation();
     }
