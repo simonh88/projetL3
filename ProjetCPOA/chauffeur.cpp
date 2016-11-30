@@ -1,24 +1,26 @@
 #include "chauffeur.h"
 #include <string>
+#include <iostream>
+
 Chauffeur::Chauffeur()
 {
 
 }
 
 
-bool Chauffeur::getDispo(){
+bool Chauffeur::getDispo() const{
     return estDispo;
 }
 
-std::string Chauffeur::getNom(){
+std::string Chauffeur::getNom() const{
     return nom;
 }
 
-std::string Chauffeur::getPrenom(){
+std::string Chauffeur::getPrenom() const{
     return prenom;
 }
 
-int Chauffeur::getNoPermis(){
+int Chauffeur::getNoPermis() const{
     return noPermis;
 }
 

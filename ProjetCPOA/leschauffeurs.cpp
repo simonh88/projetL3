@@ -11,9 +11,9 @@ Chauffeur LesChauffeurs::getChauffeur(int id){
 }
 
 int LesChauffeurs::getSize(){
-    return this->listLocation.size();
+    return this->listChauffeurs.size();
 }
 
-void LesChauffeurs::addChauffeur(const Parc &p){
-    this->listChauffeurs.push_back(p);
+void LesChauffeurs::addChauffeur(const Chauffeur &chau){
+    this->listChauffeurs.push_back(chau);
 }
