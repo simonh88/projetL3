@@ -151,6 +151,9 @@ void MainWindow::valid_addParc(){
         Parc parc(nomstr, adressestr, nbPlaces);
 
         application.addParc(parc);
+        ui->add_parcAdresse->setText("");
+        ui->add_parcNom->setText("");
+        ui->add_parcPlaces->setValue(0);
     }
 
 }
