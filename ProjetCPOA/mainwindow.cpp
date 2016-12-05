@@ -91,6 +91,7 @@ void MainWindow::refresh_ListClient(){
 }
 
 //----------- VALIDATION FORMULAIRE CHAUFFEUR --------------------
+
 void MainWindow::valid_addChauffeur(){
     QString nom = ui->add_chauffeurNom->toPlainText();
     QString prenom = ui->add_chauffeurPrenom->toPlainText();

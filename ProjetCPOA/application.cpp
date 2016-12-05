@@ -1,7 +1,9 @@
 #include "application.h"
 #include "lesclients.h"
 #include <iostream>
+#include <fstream>
 
+using namespace std;
 
 Application::Application()
 {
@@ -18,6 +20,23 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
     int id = lesClients.getSize()+1;//Pour gerer quand c'est 0 et donc que le client n'existe pas
     Client c(id, client_Nom, client_Prenom, client_Adresse);
     lesClients.setClient(c);
+
+    ofstream fichier("clients.txt", ios::out | ios::app);
+
+    if(fichier)  // si l'ouverture a réussi
+    {
+
+        std::cout << "OK à l'ouverture !" << fichier << endl;
+
+        fichier << id <<";"<< client_Nom <<";"<< client_Prenom <<";"<< client_Adresse << endl;
+
+        fichier.flush();
+        fichier.close();
+    }
+    else{  // sinon
+        cerr << "Erreur à l'ouverture !" << endl;
+    }
+
 }
 
 void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
