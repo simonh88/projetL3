@@ -2,11 +2,7 @@
 Projet C++ module CPOA
 
 
-Ajouter un parc
-Ajouter un chauffeur
 	=>Ajouter dans vehicule choix attachement a un parc
-
-
 
 
 

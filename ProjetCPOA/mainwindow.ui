@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -508,8 +508,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>264</x>
-        <y>460</y>
+        <x>270</x>
+        <y>510</y>
         <width>331</width>
         <height>61</height>
        </rect>
@@ -544,17 +544,27 @@
        <string>Type de Véhicule :</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_20">
+     <widget class="QComboBox" name="add_vehParc">
       <property name="geometry">
        <rect>
-        <x>260</x>
-        <y>250</y>
-        <width>131</width>
-        <height>31</height>
+        <x>340</x>
+        <y>450</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>460</y>
+        <width>84</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Controle Technique :</string>
+       <string>Parc</string>
       </property>
      </widget>
     </widget>

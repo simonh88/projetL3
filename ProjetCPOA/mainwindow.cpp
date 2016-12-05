@@ -90,6 +90,18 @@ void MainWindow::refresh_ListClient(){
     }
 }
 
+
+void MainWindow::refresh_ListParc(){
+    QComboBox *listParc = ui->add_vehParc;
+    listParc->clear();
+
+    for(int i = 0; i<application.getParcsSize(); i++){
+        Parc parc = application.getParc(i);
+
+        listParc->addItem(QString::fromStdString(parc.getNom()), QString::fromStdString(parc.getAdresse());
+    }
+}
+
 //----------- VALIDATION FORMULAIRE CHAUFFEUR --------------------
 
 void MainWindow::valid_addChauffeur(){
@@ -155,6 +167,7 @@ void MainWindow::valid_addParc(){
         ui->add_parcAdresse->setText("");
         ui->add_parcNom->setText("");
         ui->add_parcPlaces->setValue(0);
+        refresh_ListParc();
     }
 
 }
@@ -237,6 +250,7 @@ void MainWindow::valid_addClient(){
 void MainWindow::valid_addVehicule(){
     std::cout << "form addVeh\n\n" << std::flush;
 
+    QString nomParc = ui->add_vehParc->currentData().toString();
     QString immat = ui->add_vehImmat->toPlainText();
     QString modele = ui->add_vehModele->toPlainText();
     QDate dateCT = ui->add_vehCT->date();
@@ -253,6 +267,7 @@ void MainWindow::valid_addVehicule(){
     if(prixJournee == 0.00) check = false;
     std::string strImmatriculation = immat.toStdString();
     std::string strModele = modele.toStdString();
+    std::string strNomParc = nomParc.toStdString();
 
     switch(typeVeh)
     {
@@ -261,7 +276,7 @@ void MainWindow::valid_addVehicule(){
             std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
             Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(v);
+            application.addVehicule(v, nomParc);
 
             //Instanciation nouvelle voiture
         }
@@ -270,7 +285,7 @@ void MainWindow::valid_addVehicule(){
         {
             std::cout << "form addVeh bus ok\n\n" << std::flush;
             Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(b);
+            application.addVehicule(b, nomParc);
 
         }
         break;
@@ -278,7 +293,7 @@ void MainWindow::valid_addVehicule(){
         {
             std::cout << "form addVeh velo ok\n\n" << std::flush;
             Velo v(strImmatriculation, strModele, estDispo, prixJournee);
-            application.addVehicule(v);
+            application.addVehicule(v, nomParc);
 
         }
         break;

@@ -22,6 +22,7 @@ private:
     std::vector<std::string> split(std::string, char delimiter);
 
 
+
 private slots :
     void form_addClient();
     void form_addVehicule();
@@ -32,6 +33,7 @@ private slots :
     void refresh();
     void refresh_ListVeh(std::string typeVehicule);
     void refresh_ListClient();
+    void refresh_ListParc();
 
     void valid_addClient();
     void valid_addParc();

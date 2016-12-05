@@ -2,6 +2,8 @@
 #include "lesclients.h"
 #include <iostream>
 #include <fstream>
+#include <QFile>
+#include <QTextStream>
 
 using namespace std;
 
@@ -21,21 +23,12 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
     Client c(id, client_Nom, client_Prenom, client_Adresse);
     lesClients.setClient(c);
 
-    ofstream fichier("clients.txt", ios::out | ios::app);
+    QFile file("out.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Append))
+       return;
 
-    if(fichier)  // si l'ouverture a réussi
-    {
-
-        std::cout << "OK à l'ouverture !" << fichier << endl;
-
-        fichier << id <<";"<< client_Nom <<";"<< client_Prenom <<";"<< client_Adresse << endl;
-
-        fichier.flush();
-        fichier.close();
-    }
-    else{  // sinon
-        cerr << "Erreur à l'ouverture !" << endl;
-    }
+    QTextStream out(&file);
+    out << "Le Texte écrit dans le out.txt";
 
 }
 
