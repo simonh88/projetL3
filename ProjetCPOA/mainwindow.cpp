@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
     connect(ui->valid_addParc, SIGNAL(clicked()), this, SLOT(valid_addParc()));
     connect(ui->valid_addChauffeur, SIGNAL(clicked()), this, SLOT(valid_addChauffeur()));
+
+    this->refresh();
 }
 
 MainWindow::~MainWindow()
@@ -261,7 +263,7 @@ void MainWindow::valid_addVehicule(){
             std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
             Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(v);
+            application.addVehicule(v, nbPlaces);
 
             //Instanciation nouvelle voiture
         }
@@ -270,15 +272,15 @@ void MainWindow::valid_addVehicule(){
         {
             std::cout << "form addVeh bus ok\n\n" << std::flush;
             Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(b);
+            application.addVehicule(b, nbPlaces);
 
         }
         break;
         case -4: //VELO
         {
             std::cout << "form addVeh velo ok\n\n" << std::flush;
-            Velo v(strImmatriculation, strModele, estDispo, prixJournee);
-            application.addVehicule(v);
+            Velo v(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
+            application.addVehicule(v, assistElec);
 
         }
         break;

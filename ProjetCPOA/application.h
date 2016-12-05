@@ -16,7 +16,7 @@ private:
     LesChauffeurs lesChauffeurs;
 public:
     Application();
-    void addVehicule(Vehicule veh);
+    void addVehicule(Vehicule veh, int nbPlaces);
     void addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse);
     void addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh);
     void addParc(Parc parc);
@@ -31,6 +31,14 @@ public:
     Client getClientById(int id);
     void afficherLocations();
     void afficherParcs();
+
+    bool to_bool(std::string &s);
+
+    void loadData();
+    void loadClients();
+    void loadVehicules();
+    void loadChauffeurs();
+    void loadParcs();
 };
 
 #endif // APPLICATION_H
