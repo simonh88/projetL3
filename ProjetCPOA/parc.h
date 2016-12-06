@@ -14,12 +14,12 @@ private:
 public:
     Parc(std::string &nom, std::string &adresse, int &nbPlaces);
 
-    std::string getNom() ;
-    std::string getAdresse() ;
-    int getNbPlaces() ;
+    std::string getNom() const;
+    std::string getAdresse() const;
+    int getNbPlaces() const;
 
-    void setNom( std::string &value);
-    void setAdresse( std::string &value);
+    void setNom(const std::string &value);
+    void setAdresse(const std::string &value);
     void setNbPlaces(int value);
 
     void printParc();

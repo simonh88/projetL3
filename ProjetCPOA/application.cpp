@@ -182,6 +182,7 @@ void Application::addVehicule(Vehicule veh, int extra, int idParc)
 
     cout << "idParc: " << idParc << endl;
     cout << "addVehicule adr getParc : " << parc << endl;
+    cout << "Parc name : " << parc->getNom() << endl;
 
     //parc->setVehicule(veh);
 
