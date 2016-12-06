@@ -7,11 +7,11 @@ class LesParcs
 {
 
 private:
-    std::vector<Parc> listParc;
+    std::vector<Parc*> listParc;
 
 public:
     LesParcs();
-    Parc& getParc(int id);
+    Parc* getParc(int id);
     int getSize();
     void addParc(Parc* P);
 

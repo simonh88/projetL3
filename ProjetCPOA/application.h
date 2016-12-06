@@ -40,7 +40,7 @@ public:
     void loadChauffeurs();
     void loadParcs();
     int getParcsSize();
-    Parc getParc(int id);
+    Parc* getParc(int id);
 };
 
 #endif // APPLICATION_H

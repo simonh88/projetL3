@@ -178,11 +178,12 @@ void Application::loadParcs(){
 
 void Application::addVehicule(Vehicule veh, int extra, int idParc)
 {
-    Parc parc = lesParcs.getParc(idParc);
+    Parc* parc = lesParcs.getParc(idParc);
 
-    cout << "adr getParc : " << &parc << endl;
+    cout << "idParc: " << idParc << endl;
+    cout << "addVehicule adr getParc : " << parc << endl;
 
-    parc.setVehicule(veh);
+    //parc->setVehicule(veh);
 
 
     ofstream fichier("vehicules.txt", ios::out | ios::app);
@@ -310,25 +311,25 @@ void Application::afficherLocations(){
 void Application::afficherParcs(){
     std::cout << "\n\n      - LISTE PARCS :\n" << std::flush;
     for(int i = 0; i<lesParcs.getSize(); i++){
-        lesParcs.getParc(i).printParc();
+        lesParcs.getParc(i)->printParc();
     }
 }
 
 
 
 int Application::getVehiculesSize(int idParc){
-    Parc parc = getParc(idParc);
-    std::cout << "Nom du parc : " << parc.getNom() << std::endl;
+    Parc* parc = getParc(idParc);
+    std::cout << "Nom du parc : " << parc->getNom() << std::endl;
     //parc.lesVehicules.listVehicules
-    return parc.getVehiculesSize();
+    return parc->getVehiculesSize();
 }
 
 Vehicule Application::getVehiculeById(int id, int idParc){
-    Parc parc = getParc(idParc);
+    Parc* parc = getParc(idParc);
 
     cout << "adr parc veh : " << &parc << endl;
 
-    return parc.getVehicule(id);
+    return parc->getVehicule(id);
 }
 
 int Application::getClientsSize(){
@@ -343,6 +344,6 @@ int Application::getParcsSize(){
     return lesParcs.getSize();
 }
 
-Parc Application::getParc(int id){
+Parc* Application::getParc(int id){
     return lesParcs.getParc(id);
 }

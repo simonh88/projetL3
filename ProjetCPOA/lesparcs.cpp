@@ -7,12 +7,12 @@ LesParcs::LesParcs()
 
 }
 
-Parc& LesParcs::getParc(int id){
-    Parc &parc = this->listParc.at(id);
+Parc* LesParcs::getParc(int id){
+    Parc* parc = this->listParc.at(id);
 
-    std::cout << "lesParcs getParc : " << &parc << std::endl;
+    std::cout << "lesParcs getParc : " << parc << "      | id : " << id << std::endl;
 
-    return parc;
+    return this->listParc.at(id);
 }
 
 int LesParcs::getSize(){
@@ -23,5 +23,5 @@ void LesParcs::addParc(Parc* p){
 
     std::cout << "lesparcs addparc : " << p << std::endl;
 
-    this->listParc.push_back(*p);
+    this->listParc.push_back(p);
 }

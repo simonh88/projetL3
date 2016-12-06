@@ -113,9 +113,9 @@ void MainWindow::refresh_ListParc(){
     listParc2->clear();
 
     for(int i = 0; i<application.getParcsSize(); i++){
-        Parc parc = application.getParc(i);
-        listParc2->addItem(QString::fromStdString(parc.getNom()), QString::number(i));
-        listParc->addItem(QString::fromStdString(parc.getNom()), QString::number(i));
+        Parc* parc = application.getParc(i);
+        listParc2->addItem(QString::fromStdString(parc->getNom()), QString::number(i));
+        listParc->addItem(QString::fromStdString(parc->getNom()), QString::number(i));
     }
 }
 

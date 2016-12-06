@@ -7,19 +7,19 @@ Parc::Parc(std::string &nom, std::string &adresse, int &nbPlaces): nom(nom), adr
 
 }
 
-std::string Parc::getAdresse() const{
+std::string Parc::getAdresse() {
     return adresse;
 }
 
-std::string Parc::getNom() const{
+std::string Parc::getNom() {
     return nom;
 }
 
-int Parc::getNbPlaces() const{
+int Parc::getNbPlaces() {
     return nbPlaces;
 }
 
-void Parc::setAdresse(const std::string &value){
+void Parc::setAdresse( std::string &value){
     adresse = value;
 }
 
@@ -27,7 +27,7 @@ void Parc::setNbPlaces(int value){
     nbPlaces = value;
 }
 
-void Parc::setNom(const std::string &value){
+void Parc::setNom( std::string &value){
     nom = value;
 }
 
