@@ -54,7 +54,7 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::refresh(){
-    //this->refresh_ListVeh("");
+    this->refresh_ListVeh("0", -1);
     this->refresh_ListClient();
     this->refresh_ListParc();
 }
@@ -71,17 +71,22 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
 
     listVeh->clear();
 
-    std::cout << "On refresh les vehicules dans location : " << std::endl;
-    std::cout << "Size du parc :  "<< application.getVehiculesSize(idParc) << std::endl;
+    std::cout << "refresh_ListVeh" << std::endl;
 
-    for(int i=0; i<application.getVehiculesSize(idParc);i++){
-        Vehicule veh = application.getVehiculeById(i, idParc);
-        if(veh.getEstDispo()){
-           if(typeVehicule.empty()){
-               listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
-           }else if(veh.getType().compare(typeVehicule) == 0){
-               listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
-           }
+    if(idParc > 0){
+
+        std::cout << "On refresh les vehicules dans location : " << std::endl;
+        std::cout << "Size du parc :  "<< application.getVehiculesSize(idParc) << std::endl;
+
+        for(int i=0; i<application.getVehiculesSize(idParc);i++){
+            Vehicule veh = application.getVehiculeById(i, idParc);
+            if(veh.getEstDispo()){
+               if(typeVehicule.empty()){
+                   listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+               }else if(veh.getType().compare(typeVehicule) == 0){
+                   listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+               }
+            }
         }
     }
 }
@@ -175,7 +180,9 @@ void MainWindow::valid_addParc(){
         std::string adressestr = adresse.toStdString();
         Parc parc(nomstr, adressestr, nbPlaces);
 
-        application.addParc(parc);
+        std::cout << "adr create Parc : " << &parc << std::endl;
+
+        application.addParc(&parc);
         ui->add_parcAdresse->setText("");
         ui->add_parcNom->setText("");
         ui->add_parcPlaces->setValue(0);
@@ -235,7 +242,7 @@ void MainWindow::valid_addClient(){
 
         //c.printClient();
         application.addClient(client_Nom, client_Prenom, client_Adresse);
-        application.afficherClients();
+        //application.afficherClients();
 
         ui->add_clientNom->setText("");
         ui->add_clientPrenom->setText("");
@@ -284,7 +291,7 @@ void MainWindow::valid_addVehicule(){
     {
         case -3: //VOITURE
          {
-            std::cout << "form addVeh voiture ok\n\n" << std::flush;
+            //std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
             Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(v, nbPlaces, idParc);
@@ -294,14 +301,14 @@ void MainWindow::valid_addVehicule(){
         break;
         case -2: //BUS
         {
-            std::cout << "form addVeh bus ok\n\n" << std::flush;
+            //std::cout << "form addVeh bus ok\n\n" << std::flush;
             Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(b, nbPlaces, idParc);
         }
         break;
         case -4: //VELO
         {
-            std::cout << "form addVeh velo ok\n\n" << std::flush;
+            //std::cout << "form addVeh velo ok\n\n" << std::flush;
 
             Velo v(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
             application.addVehicule(v, assistElec, idParc);
@@ -310,13 +317,13 @@ void MainWindow::valid_addVehicule(){
         break;
         default:
         {
-            std::cout << "form addVeh choix veh a faire\n\n" << std::flush;
+            //std::cout << "form addVeh choix veh a faire\n\n" << std::flush;
             check = false;
         }
         break;
     }
 
-   application.afficherVehicules();
+   //application.afficherVehicules();
    ui->add_vehModele->setText("");
    ui->add_vehImmat->setText("");
    ui->add_vehPlaces->setValue(0);
@@ -331,6 +338,9 @@ void MainWindow::select_locVeh(int id){
     // id -2 : Voiture
     // id -3 : Bus
     // id -4 : Vélo
+
+    std::cout << "select_locVeh" << std::flush;
+
     switch(id){
     case -2://Voiture
         refresh_ListVeh("Voiture", -1);
@@ -350,6 +360,9 @@ void MainWindow::select_locVeh2(int id, int idParc){
     // id -2 : Voiture
     // id -3 : Bus
     // id -4 : Vélo
+
+    std::cout << "select_locVeh2 : " << id << " | " << idParc << std::endl;
+
     switch(id){
     case -2://Voiture
         refresh_ListVeh("Voiture", idParc);
@@ -408,7 +421,7 @@ void MainWindow::select_typeVeh(int id){
 void MainWindow::select_parc(int idParc){
     ui->add_locVehicule->setEnabled(true);
     int typeVeh = ui->choixLocVeh->checkedId();
-    std::cout << "TYPE VEH : " << typeVeh << std::endl;
+    std::cout << "select_parc TYPE VEH : " << typeVeh << std::endl;
     select_locVeh2(typeVeh, idParc);
 }
 
@@ -419,7 +432,7 @@ void MainWindow::select_parc(int idParc){
 
 
 void MainWindow::valid_addLocation(){
-    std::cout << "form addLocation\n\n" << std::flush;
+    //std::cout << "form addLocation\n\n" << std::flush;
 
     int idClient = ui->add_locClient->currentData().toInt()-1;
     QString refBanq = ui->add_locRefBanq->toPlainText();

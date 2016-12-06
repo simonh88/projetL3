@@ -131,7 +131,7 @@ void Application::loadChauffeurs(){
 
             bool dispo = to_bool(ch_EstDispo);
 
-            cout << "Permis : " << ch_Permis << " - Nom : " << ch_Nom << " - Prenom : " << ch_Prenom << " - dispo : " << ch_EstDispo << endl ;
+            //cout << "Permis : " << ch_Permis << " - Nom : " << ch_Nom << " - Prenom : " << ch_Prenom << " - dispo : " << ch_EstDispo << endl ;
 
             Chauffeur chauffeur(ch_Permis, ch_Nom, ch_Prenom, dispo);
             lesChauffeurs.addChauffeur(chauffeur);
@@ -164,7 +164,7 @@ void Application::loadParcs(){
             cout << "Nom : " << parc_Nom << " - Adresse : " << parc_Adresse << " - nbPlaces : " << nbPlaces << endl ;
 
             Parc parc(parc_Nom, parc_Adresse, nbPlaces);
-            lesParcs.addParc(parc);
+            lesParcs.addParc(&parc);
         }
     }
     else{
@@ -179,6 +179,9 @@ void Application::loadParcs(){
 void Application::addVehicule(Vehicule veh, int extra, int idParc)
 {
     Parc parc = lesParcs.getParc(idParc);
+
+    cout << "adr getParc : " << &parc << endl;
+
     parc.setVehicule(veh);
 
 
@@ -229,8 +232,10 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
     //lesClients.setClient(c);
 }
 
-void Application::addParc(Parc parc)
+void Application::addParc(Parc* parc)
 {
+    std::cout << "adr addParc : " << parc << std::endl;
+
     lesParcs.addParc(parc);
 
     afficherParcs();
@@ -239,7 +244,7 @@ void Application::addParc(Parc parc)
 
     if(fichier){
 
-        fichier << parc.getNom() <<";"<< parc.getAdresse() <<";"<< parc.getNbPlaces() << endl;
+        fichier << parc->getNom() <<";"<< parc->getAdresse() <<";"<< parc->getNbPlaces() << endl;
 
         fichier.flush();
         fichier.close();
@@ -320,6 +325,9 @@ int Application::getVehiculesSize(int idParc){
 
 Vehicule Application::getVehiculeById(int id, int idParc){
     Parc parc = getParc(idParc);
+
+    cout << "adr parc veh : " << &parc << endl;
+
     return parc.getVehicule(id);
 }
 

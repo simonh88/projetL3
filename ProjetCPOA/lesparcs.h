@@ -11,9 +11,9 @@ private:
 
 public:
     LesParcs();
-    Parc getParc(int id);
+    Parc& getParc(int id);
     int getSize();
-    void addParc(const Parc &P);
+    void addParc(Parc* P);
 
 };
 

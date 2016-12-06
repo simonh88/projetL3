@@ -19,7 +19,7 @@ public:
     void addVehicule(Vehicule veh, int nbPlaces, int idParc);
     void addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse);
     void addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh);
-    void addParc(Parc parc);
+    void addParc(Parc* parc);
     void addChauffeur(Chauffeur chauffeur);
     void afficherClients();
     void afficherVehicules();
