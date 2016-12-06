@@ -5,7 +5,7 @@
 class Velo : public Vehicule
 {
 public:
-    Velo(std::string immatriculation, std::string modele, bool estDispo, double prixJournee);
+    Velo(std::string immatriculation, std::string modele, bool estDispo, double prixJournee, bool assitElec);
     //virtual ~Velo();
 };
 

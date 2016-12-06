@@ -20,7 +20,7 @@ private:
     Ui::MainWindow *ui;
     Application application;
     std::vector<std::string> split(std::string, char delimiter);
-
+    void select_locVeh2(int id, int idParc);
 
 
 private slots :
@@ -31,7 +31,7 @@ private slots :
     void form_addLocation();
 
     void refresh();
-    void refresh_ListVeh(std::string typeVehicule);
+    void refresh_ListVeh(std::string typeVehicule, int idParc);
     void refresh_ListClient();
     void refresh_ListParc();
 
@@ -44,6 +44,7 @@ private slots :
     void select_locVeh(int id);
 
     void valid_addLocation();
+    void select_parc(int idParc);
 };
 
 #endif // MAINWINDOW_H

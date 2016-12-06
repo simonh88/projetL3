@@ -1,0 +1,3 @@
+Voiture;AF-536-VB;BMW X6;1;60;5
+Bus;ST-158-AN;Stan;1;90;30
+Velo;51;Bicloo;1;8;1

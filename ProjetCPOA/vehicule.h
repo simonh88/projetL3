@@ -12,6 +12,7 @@ protected:
     double prixJournee;
     std::string urlImage;
     std::string modele;
+    bool assistElec;
 
 public:
     Vehicule();
