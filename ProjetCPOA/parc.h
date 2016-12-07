@@ -23,7 +23,7 @@ public:
     void setNbPlaces(int value);
 
     void printParc();
-    void setVehicule(Vehicule* &veh);
+    void setVehicule(Vehicule* veh);
     Vehicule* getVehicule(int id);
     int getVehiculesSize();
 };

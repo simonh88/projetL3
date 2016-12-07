@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "test.h"
 #include <iostream>
 #include "client.h"
 #include "vehicule.h"
@@ -31,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valid_addVehicule, SIGNAL(clicked()), this, SLOT(valid_addVehicule()));
     //---------Attachement des fonctions aux groupes de boutons---------/
     connect(ui->choixTypeVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
-    //connect(ui->choixLocVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_locVeh(int)));
+    connect(ui->choixLocVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_locVeh(int)));
 
     connect(ui->add_locParc, SIGNAL(currentIndexChanged(int)), this, SLOT(select_parc(int)));
 
@@ -71,12 +70,12 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
 
     listVeh->clear();
 
-    std::cout << "refresh_ListVeh" << std::endl;
+    //std::cout << "refresh_ListVeh" << std::endl;
 
-    if(idParc > 0){
+    if(idParc >= 0){
 
-        std::cout << "On refresh les vehicules dans location : " << std::endl;
-        std::cout << "Size du parc :  "<< application.getVehiculesSize(idParc) << std::endl;
+        //std::cout << "On refresh les vehicules dans location : " << std::endl;
+        //std::cout << "Size du parc :  "<< application.getVehiculesSize(idParc) << std::endl;
 
         for(int i=0; i<application.getVehiculesSize(idParc);i++){
             Vehicule* veh = application.getVehiculeById(i, idParc);
@@ -333,25 +332,14 @@ void MainWindow::valid_addVehicule(){
 
 }
 
-void MainWindow::select_locVeh(int id){
-    //std::cout << id <<std::flush;
-    // id -2 : Voiture
-    // id -3 : Bus
-    // id -4 : Vélo
+void MainWindow::select_locVeh(int typeVeh){
+    ui->add_locVehicule->setEnabled(true);
+    int idParc = ui->add_locParc->currentIndex();
 
-    //std::cout << "select_locVeh" << std::flush;
+    //std::cout << "select_parc IDPARC : " << idParc << std::endl;
+    //std::cout << "select_parc TYPE VEH : " << typeVeh << std::endl;
 
-    switch(id){
-    case -2://Voiture
-        refresh_ListVeh("Voiture", -1);
-        break;
-    case -3://Bus
-        refresh_ListVeh("Bus", -1);
-        break;
-    case -4://Vélo
-        refresh_ListVeh("Velo", -1);
-        break;
-    }
+    select_locVeh2(typeVeh, idParc);
 }
 
 
@@ -421,7 +409,10 @@ void MainWindow::select_typeVeh(int id){
 void MainWindow::select_parc(int idParc){
     ui->add_locVehicule->setEnabled(true);
     int typeVeh = ui->choixLocVeh->checkedId();
+
+    //std::cout << "select_parc IDPARC : " << idParc << std::endl;
     //std::cout << "select_parc TYPE VEH : " << typeVeh << std::endl;
+
     select_locVeh2(typeVeh, idParc);
 }
 
@@ -475,9 +466,6 @@ void MainWindow::valid_addLocation(){
 
 
 void MainWindow::form_addClient(){
-    test t;
-    t.print();
-
     ui->tabWidget->setCurrentIndex(1);
 }
 

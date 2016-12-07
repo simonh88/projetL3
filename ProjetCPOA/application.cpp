@@ -27,9 +27,9 @@ bool Application::to_bool(std::string &s) {
 
 void Application::loadData(){
     this->loadClients();
-    this->loadVehicules();
     this->loadChauffeurs();
     this->loadParcs();
+    this->loadVehicules();
 }
 
 void Application::loadClients(){
@@ -76,7 +76,7 @@ void Application::loadVehicules(){
         {
             //cout << ligne << endl;
             stringstream ss(ligne);
-            string veh_Type, veh_Immatriculation, veh_Modele, veh_EstDispo, veh_PrixJournee, veh_Extra;
+            string veh_Type, veh_Immatriculation, veh_Modele, veh_EstDispo, veh_PrixJournee, veh_Extra, veh_IdParc;
 
             getline(ss,veh_Type, ';');
             getline(ss,veh_Immatriculation, ';');
@@ -84,25 +84,42 @@ void Application::loadVehicules(){
             getline(ss,veh_EstDispo, ';');
             getline(ss,veh_PrixJournee, ';');
             getline(ss,veh_Extra, ';');
+            getline(ss,veh_IdParc, ';');
 
             bool estDispo = to_bool(veh_EstDispo);
             double prixJournee = atof(veh_PrixJournee.c_str());
+            int idParc = atoi(veh_IdParc.c_str());
 
             if(!veh_Type.compare("Voiture")){
+
                 int nbPlaces = atoi(veh_Extra.c_str());
+
                 Voiture* veh = new Voiture(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
                 lesVehicules.setVehicule(veh);
+
+                lesParcs.getParc(idParc)->setVehicule(veh);
+
             }
             if(!veh_Type.compare("Bus")){
+
                 int nbPlaces = atoi(veh_Extra.c_str());
+
                 Bus* veh = new Bus(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
                 lesVehicules.setVehicule(veh);
+
+                lesParcs.getParc(idParc)->setVehicule(veh);
             }
             if(!veh_Type.compare("Velo")){
+
                 bool assist = to_bool(veh_Extra);
+
                 Velo* veh = new Velo(veh_Immatriculation, veh_Modele, estDispo, prixJournee, assist);
                 lesVehicules.setVehicule(veh);
+
+                lesParcs.getParc(idParc)->setVehicule(veh);
             }
+
+            //cout << "size parc : " << lesParcs.getParc(idParc)->getVehiculesSize() << endl;
 
         }
     }
@@ -161,7 +178,7 @@ void Application::loadParcs(){
 
             int nbPlaces = atoi(parc_NbPlaces.c_str());
 
-            cout << "Nom : " << parc_Nom << " - Adresse : " << parc_Adresse << " - nbPlaces : " << nbPlaces << endl ;
+            //cout << "Nom : " << parc_Nom << " - Adresse : " << parc_Adresse << " - nbPlaces : " << nbPlaces << endl ;
 
             Parc* parc = new Parc(parc_Nom, parc_Adresse, nbPlaces);
             lesParcs.addParc(parc);
@@ -184,14 +201,18 @@ void Application::addVehicule(Vehicule* veh, int extra, int idParc)
     //cout << "addVehicule adr getParc : " << parc << endl;
     //cout << "Parc name : " << parc->getNom() << endl;
 
+    //cout << "Parc Size avant : " << parc->getVehiculesSize() << endl;
     parc->setVehicule(veh);
+    //cout << "Parc Size apres : " << parc->getVehiculesSize() << endl;
+
+
 
 
     ofstream fichier("../ProjetCPOA/data/vehicules.txt", ios::out | ios::app);
 
     if(fichier){
 
-        fichier << veh->getType() <<";"<< veh->getImmatriculation() <<";"<< veh->getModele() <<";"<< veh->getEstDispo() <<";"<< veh->getPrixJournee() <<";"<< extra << endl;
+        fichier << veh->getType() <<";"<< veh->getImmatriculation() <<";"<< veh->getModele() <<";"<< veh->getEstDispo() <<";"<< veh->getPrixJournee() <<";"<< extra <<";"<< idParc << endl;
 
         fichier.flush();
         fichier.close();
@@ -320,7 +341,7 @@ void Application::afficherParcs(){
 
 int Application::getVehiculesSize(int idParc){
     Parc* parc = getParc(idParc);
-    std::cout << "Nom du parc : " << parc->getNom() << std::endl;
+    //std::cout << "Nom du parc : " << parc->getNom() << std::endl;
     //parc.lesVehicules.listVehicules
     return parc->getVehiculesSize();
 }

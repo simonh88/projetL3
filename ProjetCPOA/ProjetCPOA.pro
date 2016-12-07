@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     mainwindow.cpp \
-    test.cpp \
     lesclients.cpp \
     client.cpp \
     lesvehicules.cpp \
@@ -33,7 +32,6 @@ SOURCES += main.cpp\
 
 
 HEADERS  += mainwindow.h \
-    test.h \
     lesclients.h \
     client.h \
     location.h \

@@ -1013,6 +1013,9 @@
       <property name="text">
        <string>&amp;Voiture</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
       <attribute name="buttonGroup">
        <string notr="true">choixLocVeh</string>
       </attribute>
