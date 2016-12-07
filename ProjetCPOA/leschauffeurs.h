@@ -6,13 +6,13 @@
 class LesChauffeurs
 {
 private:
-    std::vector<Chauffeur> listChauffeurs;
+    std::vector<Chauffeur*> listChauffeurs;
 
 public:
     LesChauffeurs();
 
-    Chauffeur getChauffeur(int id);
+    Chauffeur* getChauffeur(int id);
     int getSize();
-    void addChauffeur(const Chauffeur &chau);
+    void addChauffeur(Chauffeur* &chau);
 };
 #endif // LESCHAUFFEURS_H

@@ -8,12 +8,12 @@
 class LesClients
 {
 private:
-    std::vector<Client> listClients;
+    std::vector<Client*> listClients;
 
 public:
     LesClients();
-    Client getClient(int id) const;
-    void setClient(const Client c);
+    Client* getClient(int id);
+    void setClient(Client* c);
     int getSize() const;
 };
 

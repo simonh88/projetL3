@@ -31,11 +31,11 @@ void Parc::setNom(const std::string &value){
     nom = value;
 }
 
-void Parc::setVehicule(Vehicule &veh){
+void Parc::setVehicule(Vehicule* &veh){
     lesVehicules.setVehicule(veh);
 }
 
-Vehicule Parc::getVehicule(int id){
+Vehicule* Parc::getVehicule(int id){
     return lesVehicules.getVehicule(id);
 }
 

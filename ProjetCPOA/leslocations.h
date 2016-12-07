@@ -6,13 +6,13 @@
 class LesLocations
 {
 private:
-    std::vector<Location> listLocation;
+    std::vector<Location*> listLocation;
 
 public:
     LesLocations();
-    Location getLocation(int id);
+    Location* getLocation(int id);
     int getSize();
-    void addLocation(const Location &loc);
+    void addLocation(Location* &loc);
 };
 
 

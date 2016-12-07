@@ -8,12 +8,12 @@ LesClients::LesClients()
 
 }
 
-Client LesClients::getClient(int id) const
+Client* LesClients::getClient(int id)
 {
     return this->listClients.at(id);
 }
 
-void LesClients::setClient(const Client c)
+void LesClients::setClient(Client* c)
 {
     this->listClients.push_back(c);
 }

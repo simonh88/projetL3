@@ -14,14 +14,14 @@ private:
     std::string modePaiement;
     Date dateDebut;
     Date dateFin;
-    Vehicule vehic;
-    Client cli;
+    Vehicule* vehic;
+    Client* cli;
     bool assistance;
 
 public:
-    Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule &vehicule);
-    Vehicule getVehic() const;
-    void setVehic(const Vehicule &value);
+    Location(int &id, Client* &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule* &vehicule);
+    Vehicule* getVehic();
+    void setVehic(Vehicule* value);
     int getIdLocation() const;
     void setPrix(double value);
     std::string getModePaiement() const;
@@ -30,8 +30,8 @@ public:
     void setDateDebut(const Date &value);
     Date getDateFin() const;
     void setDateFin(const Date &value);
-    Client getCli() const;
-    void setCli(const Client &value);
+    Client* getCli();
+    void setCli(Client* &value);
     void printLocation();
 };
 

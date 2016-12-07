@@ -6,13 +6,13 @@
 class LesVehicules
 {
 private:
-    std::vector<Vehicule> listVehicules;
+    std::vector<Vehicule*> listVehicules;
 public:
     LesVehicules();
-    Vehicule getVehicule(int id) const;
-    void setVehicule(const Vehicule c);
+    Vehicule* getVehicule(int id);
+    void setVehicule(Vehicule* c);
     int getSize() const;
-    Vehicule getVehiculeByImmat(std::string immat);
+    Vehicule* getVehiculeByImmat(std::string immat);
 };
 
 #endif // LESVEHICULES_H

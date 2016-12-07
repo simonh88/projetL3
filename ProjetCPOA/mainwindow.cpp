@@ -79,12 +79,12 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
         std::cout << "Size du parc :  "<< application.getVehiculesSize(idParc) << std::endl;
 
         for(int i=0; i<application.getVehiculesSize(idParc);i++){
-            Vehicule veh = application.getVehiculeById(i, idParc);
-            if(veh.getEstDispo()){
+            Vehicule* veh = application.getVehiculeById(i, idParc);
+            if(veh->getEstDispo()){
                if(typeVehicule.empty()){
-                   listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
-               }else if(veh.getType().compare(typeVehicule) == 0){
-                   listVeh->addItem(QString::fromStdString(veh.getModele()), QString::fromStdString(veh.getImmatriculation()));
+                   listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
+               }else if(veh->getType().compare(typeVehicule) == 0){
+                   listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
                }
             }
         }
@@ -97,9 +97,9 @@ void MainWindow::refresh_ListClient(){
     listClient->clear();
 
     for(int i=0; i<application.getClientsSize();i++){
-        Client client = application.getClientById(i);
+        Client* client = application.getClientById(i);
 
-        listClient->addItem(QString::fromStdString(client.getNom()+" "+client.getPrenom()), QString::number(client.getIdClient()));
+        listClient->addItem(QString::fromStdString(client->getNom()+" "+client->getPrenom()), QString::number(client->getIdClient()));
     }
 }
 
@@ -147,7 +147,7 @@ void MainWindow::valid_addChauffeur(){
         std::string permisstr = permis.toStdString();
 
     //std::cout << "Dispo :  "<< dispo << std::flush;
-        Chauffeur chauffeur(permisstr, nomstr, prenomstr, dispo);
+        Chauffeur* chauffeur = new Chauffeur(permisstr, nomstr, prenomstr, dispo);
         application.addChauffeur(chauffeur);
 
         ui->add_chauffeurMail->setText("");
@@ -178,11 +178,11 @@ void MainWindow::valid_addParc(){
     if(check){
         std::string nomstr = nom.toStdString();
         std::string adressestr = adresse.toStdString();
-        Parc parc(nomstr, adressestr, nbPlaces);
+        Parc* parc = new Parc(nomstr, adressestr, nbPlaces);
 
-        std::cout << "adr create Parc : " << &parc << std::endl;
+        //std::cout << "adr create Parc : " << parc << std::endl;
 
-        application.addParc(&parc);
+        application.addParc(parc);
         ui->add_parcAdresse->setText("");
         ui->add_parcNom->setText("");
         ui->add_parcPlaces->setValue(0);
@@ -233,7 +233,7 @@ void MainWindow::valid_addClient(){
     }*/
 
     if(check){
-        std::cout << "form addClient OK\n\n" << std::flush;
+        //std::cout << "form addClient OK\n\n" << std::flush;
 
         std::string client_Nom = nom.toStdString();
         std::string client_Prenom = prenom.toStdString();
@@ -267,7 +267,7 @@ void MainWindow::valid_addClient(){
 
 
 void MainWindow::valid_addVehicule(){
-    std::cout << "form addVeh\n\n" << std::flush;
+    //std::cout << "form addVeh\n\n" << std::flush;
 
     int idParc = ui->add_vehParc->currentData().toInt();
     QString immat = ui->add_vehImmat->toPlainText();
@@ -293,7 +293,7 @@ void MainWindow::valid_addVehicule(){
          {
             //std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
-            Voiture v(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
+            Voiture* v = new Voiture(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(v, nbPlaces, idParc);
 
             //Instanciation nouvelle voiture
@@ -302,7 +302,7 @@ void MainWindow::valid_addVehicule(){
         case -2: //BUS
         {
             //std::cout << "form addVeh bus ok\n\n" << std::flush;
-            Bus b(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
+            Bus* b = new Bus(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
             application.addVehicule(b, nbPlaces, idParc);
         }
         break;
@@ -310,7 +310,7 @@ void MainWindow::valid_addVehicule(){
         {
             //std::cout << "form addVeh velo ok\n\n" << std::flush;
 
-            Velo v(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
+            Velo* v = new Velo(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
             application.addVehicule(v, assistElec, idParc);
 
         }
@@ -339,7 +339,7 @@ void MainWindow::select_locVeh(int id){
     // id -3 : Bus
     // id -4 : Vélo
 
-    std::cout << "select_locVeh" << std::flush;
+    //std::cout << "select_locVeh" << std::flush;
 
     switch(id){
     case -2://Voiture
@@ -361,7 +361,7 @@ void MainWindow::select_locVeh2(int id, int idParc){
     // id -3 : Bus
     // id -4 : Vélo
 
-    std::cout << "select_locVeh2 : " << id << " | " << idParc << std::endl;
+    //std::cout << "select_locVeh2 : " << id << " | " << idParc << std::endl;
 
     switch(id){
     case -2://Voiture
@@ -421,7 +421,7 @@ void MainWindow::select_typeVeh(int id){
 void MainWindow::select_parc(int idParc){
     ui->add_locVehicule->setEnabled(true);
     int typeVeh = ui->choixLocVeh->checkedId();
-    std::cout << "select_parc TYPE VEH : " << typeVeh << std::endl;
+    //std::cout << "select_parc TYPE VEH : " << typeVeh << std::endl;
     select_locVeh2(typeVeh, idParc);
 }
 

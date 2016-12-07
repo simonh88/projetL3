@@ -34,7 +34,7 @@ void Application::loadData(){
 
 void Application::loadClients(){
 
-    ifstream fichier("clients.txt", ios::in);
+    ifstream fichier("../ProjetCPOA/data/clients.txt", ios::in);
 
     if(fichier)
     {
@@ -54,7 +54,7 @@ void Application::loadClients(){
 
             int id = atoi(client_Id.c_str());
 
-            Client c(id, client_Nom, client_Prenom, client_Adresse);
+            Client* c = new Client(id, client_Nom, client_Prenom, client_Adresse);
             lesClients.setClient(c);
 
             //c.printClient();
@@ -67,7 +67,7 @@ void Application::loadClients(){
 
 void Application::loadVehicules(){
 
-    ifstream fichier("vehicules.txt", ios::in);
+    ifstream fichier("../ProjetCPOA/data/vehicules.txt", ios::in);
 
     if(fichier)
     {
@@ -90,17 +90,17 @@ void Application::loadVehicules(){
 
             if(!veh_Type.compare("Voiture")){
                 int nbPlaces = atoi(veh_Extra.c_str());
-                Voiture veh(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
+                Voiture* veh = new Voiture(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
                 lesVehicules.setVehicule(veh);
             }
             if(!veh_Type.compare("Bus")){
                 int nbPlaces = atoi(veh_Extra.c_str());
-                Bus veh(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
+                Bus* veh = new Bus(veh_Immatriculation, veh_Modele, nbPlaces, estDispo, prixJournee);
                 lesVehicules.setVehicule(veh);
             }
             if(!veh_Type.compare("Velo")){
                 bool assist = to_bool(veh_Extra);
-                Velo veh(veh_Immatriculation, veh_Modele, estDispo, prixJournee, assist);
+                Velo* veh = new Velo(veh_Immatriculation, veh_Modele, estDispo, prixJournee, assist);
                 lesVehicules.setVehicule(veh);
             }
 
@@ -113,7 +113,7 @@ void Application::loadVehicules(){
 
 void Application::loadChauffeurs(){
 
-    ifstream fichier("chauffeurs.txt", ios::in);
+    ifstream fichier("../ProjetCPOA/data/chauffeurs.txt", ios::in);
 
     if(fichier)
     {
@@ -133,7 +133,7 @@ void Application::loadChauffeurs(){
 
             //cout << "Permis : " << ch_Permis << " - Nom : " << ch_Nom << " - Prenom : " << ch_Prenom << " - dispo : " << ch_EstDispo << endl ;
 
-            Chauffeur chauffeur(ch_Permis, ch_Nom, ch_Prenom, dispo);
+            Chauffeur* chauffeur = new Chauffeur(ch_Permis, ch_Nom, ch_Prenom, dispo);
             lesChauffeurs.addChauffeur(chauffeur);
         }
     }
@@ -144,7 +144,7 @@ void Application::loadChauffeurs(){
 
 void Application::loadParcs(){
 
-    ifstream fichier("parcs.txt", ios::in);
+    ifstream fichier("../ProjetCPOA/data/parcs.txt", ios::in);
 
     if(fichier)
     {
@@ -163,8 +163,8 @@ void Application::loadParcs(){
 
             cout << "Nom : " << parc_Nom << " - Adresse : " << parc_Adresse << " - nbPlaces : " << nbPlaces << endl ;
 
-            Parc parc(parc_Nom, parc_Adresse, nbPlaces);
-            lesParcs.addParc(&parc);
+            Parc* parc = new Parc(parc_Nom, parc_Adresse, nbPlaces);
+            lesParcs.addParc(parc);
         }
     }
     else{
@@ -176,38 +176,38 @@ void Application::loadParcs(){
 //--------------------------------------- ADDER --------------------------------------------------
 
 
-void Application::addVehicule(Vehicule veh, int extra, int idParc)
+void Application::addVehicule(Vehicule* veh, int extra, int idParc)
 {
     Parc* parc = lesParcs.getParc(idParc);
 
-    cout << "idParc: " << idParc << endl;
-    cout << "addVehicule adr getParc : " << parc << endl;
-    cout << "Parc name : " << parc->getNom() << endl;
+    //cout << "idParc: " << idParc << endl;
+    //cout << "addVehicule adr getParc : " << parc << endl;
+    //cout << "Parc name : " << parc->getNom() << endl;
 
-    //parc->setVehicule(veh);
+    parc->setVehicule(veh);
 
 
-    ofstream fichier("vehicules.txt", ios::out | ios::app);
+    ofstream fichier("../ProjetCPOA/data/vehicules.txt", ios::out | ios::app);
 
     if(fichier){
 
-        fichier << veh.getType() <<";"<< veh.getImmatriculation() <<";"<< veh.getModele() <<";"<< veh.getEstDispo() <<";"<< veh.getPrixJournee() <<";"<< extra << endl;
+        fichier << veh->getType() <<";"<< veh->getImmatriculation() <<";"<< veh->getModele() <<";"<< veh->getEstDispo() <<";"<< veh->getPrixJournee() <<";"<< extra << endl;
 
         fichier.flush();
         fichier.close();
     }
     else{
-        cerr << "Erreur à l'ouverture !" << endl;
+        //cerr << "Erreur à l'ouverture !" << endl;
     }
 }
 
 void Application::addClient(std::string &client_Nom, std::string &client_Prenom, std::string &client_Adresse)
 {
     int id = lesClients.getSize()+1;//Pour gerer quand c'est 0 et donc que le client n'existe pas
-    Client c(id, client_Nom, client_Prenom, client_Adresse);
+    Client* c = new Client(id, client_Nom, client_Prenom, client_Adresse);
     lesClients.setClient(c);
 
-    ofstream fichier("clients.txt", ios::out | ios::app);
+    ofstream fichier("../ProjetCPOA/data/clients.txt", ios::out | ios::app);
 
     if(fichier){
 
@@ -217,7 +217,7 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
         fichier.close();
     }
     else{
-        cerr << "Erreur à l'ouverture !" << endl;
+        //cerr << "Erreur à l'ouverture !" << endl;
     }
 
 }
@@ -225,9 +225,9 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
 void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
 {
     int id = lesLocations.getSize();
-    Vehicule v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
-    Client c = lesClients.getClient(loc_idClient);
-    Location l(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
+    Vehicule* v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
+    Client* c = lesClients.getClient(loc_idClient);
+    Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
     lesLocations.addLocation(l);
 
     afficherLocations();
@@ -236,13 +236,13 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
 
 void Application::addParc(Parc* parc)
 {
-    std::cout << "adr addParc : " << parc << std::endl;
+    //std::cout << "adr addParc : " << parc << std::endl;
 
     lesParcs.addParc(parc);
 
     afficherParcs();
 
-    ofstream fichier("parcs.txt", ios::out | ios::app);
+    ofstream fichier("../ProjetCPOA/data/parcs.txt", ios::out | ios::app);
 
     if(fichier){
 
@@ -252,27 +252,27 @@ void Application::addParc(Parc* parc)
         fichier.close();
     }
     else{
-        cerr << "Erreur à l'ouverture !" << endl;
+        //cerr << "Erreur à l'ouverture !" << endl;
     }
 }
 
-void Application::addChauffeur(Chauffeur chauffeur)
+void Application::addChauffeur(Chauffeur* chauffeur)
 {
     lesChauffeurs.addChauffeur(chauffeur);
 
     afficherChauffeurs();
 
-    ofstream fichier("chauffeurs.txt", ios::out | ios::app);
+    ofstream fichier("../ProjetCPOA/data/chauffeurs.txt", ios::out | ios::app);
 
     if(fichier){
 
-        fichier << chauffeur.getNoPermis() <<";"<< chauffeur.getNom() <<";"<< chauffeur.getPrenom() <<";"<< chauffeur.getDispo() << endl;
+        fichier << chauffeur->getNoPermis() <<";"<< chauffeur->getNom() <<";"<< chauffeur->getPrenom() <<";"<< chauffeur->getDispo() << endl;
 
         fichier.flush();
         fichier.close();
     }
     else{
-        cerr << "Erreur à l'ouverture !" << endl;
+        //cerr << "Erreur à l'ouverture !" << endl;
     }
 }
 
@@ -283,14 +283,14 @@ void Application::addChauffeur(Chauffeur chauffeur)
 
 void Application::afficherClients(){
     for(int i = 0; i<lesClients.getSize(); i++){
-        lesClients.getClient(i).printClient();
+        lesClients.getClient(i)->printClient();
     }
 }
 
 void Application::afficherVehicules(){
     std::cout << "\n\n      - LISTE VEHICULES :\n" << std::flush;
     for(int i = 0; i<lesVehicules.getSize(); i++){
-        lesVehicules.getVehicule(i).printVehicule();
+        lesVehicules.getVehicule(i)->printVehicule();
     }
 }
 
@@ -298,14 +298,14 @@ void Application::afficherChauffeurs()
 {
     std::cout << "\n\n      - LISTE CHAUFFEURS :\n" << std::flush;
     for(int i = 0; i<lesChauffeurs.getSize(); i++){
-        lesChauffeurs.getChauffeur(i).printChauffeur();
+        lesChauffeurs.getChauffeur(i)->printChauffeur();
     }
 }
 
 void Application::afficherLocations(){
     std::cout << "\n\n      - LISTE LOCATIONS :\n" << std::flush;
     for(int i = 0; i<lesLocations.getSize(); i++){
-        lesLocations.getLocation(i).printLocation();
+        lesLocations.getLocation(i)->printLocation();
     }
 }
 
@@ -325,10 +325,10 @@ int Application::getVehiculesSize(int idParc){
     return parc->getVehiculesSize();
 }
 
-Vehicule Application::getVehiculeById(int id, int idParc){
+Vehicule* Application::getVehiculeById(int id, int idParc){
     Parc* parc = getParc(idParc);
 
-    cout << "adr parc veh : " << &parc << endl;
+    //cout << "adr parc veh : " << &parc << endl;
 
     return parc->getVehicule(id);
 }
@@ -337,7 +337,7 @@ int Application::getClientsSize(){
     return lesClients.getSize();
 }
 
-Client Application::getClientById(int id){
+Client* Application::getClientById(int id){
     return lesClients.getClient(id);
 }
 

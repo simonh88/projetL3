@@ -2,7 +2,7 @@
 #include <string>
 #include "date.h"
 
-Location::Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule &vehicule)
+Location::Location(int &id, Client* &client, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, Vehicule* &vehicule)
 {
     idLocation = id;
     modePaiement = loc_refBanq;
@@ -10,7 +10,7 @@ Location::Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_
     dateFin = dateDebut.ajouter(loc_Duree);
     vehic = vehicule;
     cli = client;
-    prix = vehicule.getPrixJournee()*loc_Duree;
+    prix = vehicule->getPrixJournee()*loc_Duree;
     assistance = loc_assist;
 
     //TODO
@@ -25,12 +25,12 @@ Location::Location(int &id, Client &client, std::string &loc_refBanq, Date &loc_
 
 }
 
-Vehicule Location::getVehic() const
+Vehicule* Location::getVehic()
 {
     return vehic;
 }
 
-void Location::setVehic(const Vehicule &value)
+void Location::setVehic(Vehicule* value)
 {
     vehic = value;
 }
@@ -75,25 +75,25 @@ void Location::setDateFin(const Date &value)
     dateFin = value;
 }
 
-Client Location::getCli() const
+Client* Location::getCli()
 {
     return cli;
 }
 
-void Location::setCli(const Client &value)
+void Location::setCli(Client* &value)
 {
     cli = value;
 }
 
 void Location::printLocation(){
     std::cout << "LOCATION : " << idLocation <<  "\n" << std::flush;
-    std::cout << "idCLient : " << cli.getNom() << "\n" << std::flush;
+    std::cout << "idCLient : " << cli->getNom() << "\n" << std::flush;
     std::cout << "refBanq : " << modePaiement << "\n" << std::flush;
     //std::cout << "dateDebut : " <<  << "\n" << std::flush;
     //std::cout << "duree : " << duree << "\n" << std::flush;
     //std::cout << "typeVeh : " << typeVeh << "\n" << std::flush;
     std::cout << "assist ? : " << assistance << "\n" << std::flush;
-    std::cout << "immateVeh : " << vehic.getModele() << "\n" << std::flush;
+    std::cout << "immateVeh : " << vehic->getModele() << "\n" << std::flush;
 }
 
 
