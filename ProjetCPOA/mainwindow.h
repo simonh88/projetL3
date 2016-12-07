@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 private:
     Ui::MainWindow *ui;
     Application application;
@@ -45,6 +46,8 @@ private slots :
 
     void valid_addLocation();
     void select_parc(int idParc);
+
+    void majPrixLoc();
 };
 
 #endif // MAINWINDOW_H

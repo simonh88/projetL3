@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <sstream>
 #include "client.h"
 #include "vehicule.h"
 #include "voiture.h"
@@ -32,8 +33,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->choixTypeVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_typeVeh(int))) ;
     connect(ui->choixLocVeh, SIGNAL(buttonClicked(int)), this, SLOT(select_locVeh(int)));
 
-    connect(ui->add_locParc, SIGNAL(currentIndexChanged(int)), this, SLOT(select_parc(int)));
+    //----------------MAJ PRIX DANS LOCATIONS----------------------------------//
+    connect(ui->add_locDuree, SIGNAL(valueChanged(int)), this, SLOT(majPrixLoc()));
+    connect(ui->add_locVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(majPrixLoc()));
 
+
+    connect(ui->add_locParc, SIGNAL(currentIndexChanged(int)), this, SLOT(select_parc(int)));
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
     connect(ui->valid_addParc, SIGNAL(clicked()), this, SLOT(valid_addParc()));
@@ -421,6 +426,24 @@ void MainWindow::select_parc(int idParc){
 
 
 
+void MainWindow::majPrixLoc(){
+    QString immatVeh = ui->add_locVehicule->currentData().toString();
+    std::string vehicule = immatVeh.toStdString();
+
+    if(!vehicule.empty()){
+        int idParc = ui->add_locParc->currentData().toInt();
+        int duree = ui->add_locDuree->value();
+        Vehicule* v = application.getParc(idParc)->getVehiculeByImmat(vehicule);
+        int prix = v->getPrixJournee() * duree;
+        std::ostringstream oss;
+        oss << prix;
+        std::string message = "<b>Prix : " + oss.str() + " euros</b>" ;
+        ui->label_locPrix->setText(QString::fromStdString(message));
+    }else{
+        ui->label_locPrix->setText("Prix : 0 euros");
+    }
+}
+
 
 void MainWindow::valid_addLocation(){
     //std::cout << "form addLocation\n\n" << std::flush;
@@ -453,6 +476,13 @@ void MainWindow::valid_addLocation(){
     std::string refBanqstr = refBanq.toStdString();
     std::string immatVehstr = immatVeh.toStdString();
     application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
+
+    ui->add_locAssist->setChecked(false);
+    ui->add_locBus->setChecked(false);
+    ui->add_locVelo->setChecked(false);
+    ui->add_locVoiture->setChecked(false);
+    ui->add_locRefBanq->setText("");
+    ui->add_locDuree->setValue(0);
 
 }
 

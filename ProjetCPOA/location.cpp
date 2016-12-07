@@ -94,6 +94,7 @@ void Location::printLocation(){
     //std::cout << "typeVeh : " << typeVeh << "\n" << std::flush;
     std::cout << "assist ? : " << assistance << "\n" << std::flush;
     std::cout << "immateVeh : " << vehic->getModele() << "\n" << std::flush;
+    std::cout << "Prix total : " << prix << std::endl << std::flush;
 }
 
 

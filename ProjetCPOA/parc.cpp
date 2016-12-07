@@ -39,6 +39,10 @@ Vehicule* Parc::getVehicule(int id){
     return lesVehicules.getVehicule(id);
 }
 
+Vehicule* Parc::getVehiculeByImmat(std::string immat){
+    return lesVehicules.getVehiculeByImmat(immat);
+}
+
 int Parc::getVehiculesSize(){
     return lesVehicules.getSize();
 }
