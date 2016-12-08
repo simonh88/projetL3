@@ -247,11 +247,14 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
 {
     int id = lesLocations.getSize();
     Vehicule* v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
-    v->setEstDispo(false);// On rend le vehicule indisponible
+    Date dateFin = loc_DateDebut.ajouter(loc_Duree);
+    Periode* p = new Periode(loc_DateDebut,dateFin);
+    v->addIndispo(p);
+    v->afficherIndispo();
+    //v->setEstDispo(false);// On rend le vehicule indisponible
     Client* c = lesClients.getClient(loc_idClient);
     Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
     lesLocations.addLocation(l);
-
     afficherLocations();
     //lesClients.setClient(c);
 }

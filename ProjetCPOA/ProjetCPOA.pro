@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     lesparcs.cpp \
     parc.cpp \
     leschauffeurs.cpp \
-    chauffeur.cpp
+    chauffeur.cpp \
+    periode.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -46,6 +47,7 @@ HEADERS  += mainwindow.h \
     lesparcs.h \
     parc.h \
     leschauffeurs.h \
-    chauffeur.h
+    chauffeur.h \
+    periode.h
 
 FORMS    += mainwindow.ui

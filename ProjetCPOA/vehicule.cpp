@@ -55,6 +55,13 @@ std::string Vehicule::getType() const
     return this->type;
 }
 
+Periode* Vehicule::getPeriode(int i)const{
+    return this->periodeIndispo.at(i);
+}
+
+int Vehicule::getSizeIndispo(){
+    return this->periodeIndispo.size();
+}
 
 //-------------------------------- SETTERS --------------------------------------
 
@@ -84,6 +91,16 @@ void Vehicule::setType(const std::string &value)
     this->type = value;
 }
 
+void Vehicule::addIndispo(Periode* p){
+    this->periodeIndispo.push_back(p);
+}
+
+void Vehicule::afficherIndispo(){
+    std::cout << "liste indispo \`n" << std::flush;
+    for(int i = 0; i< this->getSizeIndispo() ; i++){
+        this->getPeriode(i)->afficher();
+    }
+}
 
 void Vehicule::printVehicule(){
     std::cout << "- " << getType() << " : \n" << std::flush;

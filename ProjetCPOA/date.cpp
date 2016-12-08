@@ -30,6 +30,8 @@ void Date::setJour(int value)
 {
     jour = value;
 }
+
+
 /// @brief 1 si this est plus petit que d
 /// 0 sinon et -1 si this == d
 int Date::compare(Date d)
@@ -86,6 +88,10 @@ Date Date::ajouter(int duree){
         }else{
             d.setAnnee(getAnnee());
         }
+    }else{
+        d.setJour(jours);
+        d.setMois(getMois());
+        d.setAnnee(getAnnee());
     }
     return d;
 }
@@ -99,6 +105,10 @@ void Date::split(std::string str, char delimiter) {
   mois = atoi(tok.c_str());
   getline(ss, tok, delimiter);
   annee = atoi(tok.c_str());
+}
+
+void Date::afficher(){
+    std::cout << jour << "/" << mois << "/" << annee << "\n" << std::flush;
 }
 
 Date::Date()

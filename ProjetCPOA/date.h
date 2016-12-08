@@ -20,6 +20,7 @@ public:
     void setMois(int value);
     void setJour(int value);
     int compare(Date d);
+    void afficher();
     Date();
     Date ajouter(int duree);
 };

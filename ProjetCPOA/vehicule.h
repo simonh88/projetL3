@@ -1,7 +1,8 @@
 #ifndef VEHICULE_H
 #define VEHICULE_H
 #include <string>
-
+#include "vector"
+#include <periode.h>
 
 class Vehicule
 {
@@ -13,6 +14,7 @@ protected:
     std::string urlImage;
     std::string modele;
     bool assistElec;
+    std::vector<Periode*> periodeIndispo;
 
 public:
     Vehicule();
@@ -25,6 +27,8 @@ public:
     std::string getModele() const;
     std::string getType() const;
     //virtual int getNbPlaces() const = 0;
+    Periode* getPeriode(int id) const;
+    int getSizeIndispo();
 
     void setUrlImage(const std::string &value);
     void setPrixJournee(double value);
@@ -32,6 +36,8 @@ public:
     void setEstDispo(bool value);
     void setType(const std::string &value);
     void setModele(const std::string &value);
+    void addIndispo(Periode* value);
+    void afficherIndispo();
     void printVehicule();
 };
 
