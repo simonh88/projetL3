@@ -88,7 +88,20 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
                if(typeVehicule.empty()){
                    listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
                }else if(veh->getType().compare(typeVehicule) == 0){
-                   listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
+                   QDate dateDebut = ui->add_locDateDebut->date();
+                   std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
+                   Date d(strDate);
+                   int j = 0;
+                   bool dispo = true;
+                   while(j<veh->getSizeIndispo()){
+                        if(!veh->getPeriode(j)->estDispo(d)){
+                            dispo = false;
+                        }
+                        j++;
+                   }
+                   if(dispo){
+                        listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
+                   }
                }
             }
         }
