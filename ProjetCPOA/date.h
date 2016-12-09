@@ -23,6 +23,7 @@ public:
     void afficher();
     Date();
     Date ajouter(int duree);
+    std::string toString();
 };
 
 #endif // DATE_H

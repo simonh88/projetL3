@@ -39,6 +39,7 @@ public:
     void loadVehicules();
     void loadChauffeurs();
     void loadParcs();
+    void loadIndispoVeh();
     int getParcsSize();
     Parc* getParc(int id);
 };

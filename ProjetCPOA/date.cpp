@@ -31,6 +31,13 @@ void Date::setJour(int value)
     jour = value;
 }
 
+std::string Date::toString(){
+    std::stringstream sstm;
+    sstm << jour << "/" << mois << "/" << annee;
+    return sstm.str();
+
+}
+
 
 /// @brief 1 si this est plus petit que d
 /// 0 sinon et -1 si this == d
