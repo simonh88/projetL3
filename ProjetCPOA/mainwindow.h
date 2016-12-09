@@ -48,6 +48,7 @@ private slots :
     void select_parc(int idParc);
 
     void majPrixLoc();
+    void refresh_ListVehAfterValid();
 };
 
 #endif // MAINWINDOW_H

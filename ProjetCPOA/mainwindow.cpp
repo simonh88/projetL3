@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->add_locVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(majPrixLoc()));
 
 
+    connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(refresh_ListVehAfterValid()));
+
     connect(ui->add_locParc, SIGNAL(currentIndexChanged(int)), this, SLOT(select_parc(int)));
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(valid_addLocation()));
@@ -121,6 +123,11 @@ void MainWindow::refresh_ListParc(){
         listParc2->addItem(QString::fromStdString(parc->getNom()), QString::number(i));
         listParc->addItem(QString::fromStdString(parc->getNom()), QString::number(i));
     }
+}
+
+void MainWindow::refresh_ListVehAfterValid(){
+    int idParc = ui->add_locParc->currentIndex();
+    select_parc(idParc);
 }
 
 //----------- VALIDATION FORMULAIRE CHAUFFEUR --------------------
@@ -337,6 +344,7 @@ void MainWindow::valid_addVehicule(){
 
 }
 
+
 void MainWindow::select_locVeh(int typeVeh){
     ui->add_locVehicule->setEnabled(true);
     int idParc = ui->add_locParc->currentIndex();
@@ -475,7 +483,7 @@ void MainWindow::valid_addLocation(){
     Date d(strDate);
     std::string refBanqstr = refBanq.toStdString();
     std::string immatVehstr = immatVeh.toStdString();
-    application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
+    if(check == true) application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
 
     ui->add_locAssist->setChecked(false);
     ui->add_locBus->setChecked(false);
