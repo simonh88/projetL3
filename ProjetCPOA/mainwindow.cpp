@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_addChauffeur, SIGNAL(clicked()), this, SLOT(form_addChauffeur()));
     connect(ui->btn_addParc, SIGNAL(clicked()), this, SLOT(form_addParc()));
     connect(ui->btn_addLocation, SIGNAL(clicked()), this, SLOT(form_addLocation()));
+    connect(ui->btn_showLocations, SIGNAL(clicked()), this, SLOT(tab_showLocations()));
 
 
     connect(ui->valid_addClient, SIGNAL(clicked()), this, SLOT(valid_addClient()));
@@ -38,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->add_locDateDebut, SIGNAL(dateChanged(QDate)),this,SLOT(refreshVehiculeLoc()));
     connect(ui->add_locDuree, SIGNAL(valueChanged(int)),this,SLOT(refreshVehiculeLoc()));
     connect(ui->add_locVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(majPrixLoc()));
+
+
+    connect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
 
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(refresh_ListVehAfterValid()));
@@ -65,6 +69,48 @@ void MainWindow::refresh(){
     this->refresh_ListVeh("0", -1);
     this->refresh_ListClient();
     this->refresh_ListParc();
+    this->refresh_ListLocations();
+}
+
+void MainWindow::refresh_ListLocations(){
+    QComboBox *listLocation = ui->show_locLocation;
+
+    //std::cout << "getLocationsSize : " << application.getLocationsSize() << std::endl;
+
+    listLocation->clear();
+
+    for(int i=0; i<application.getLocationsSize();i++){
+        Location* loc = application.getLocation(i);
+
+        QString client = QString::fromStdString(loc->getCli()->getNom()) +" "+ QString::fromStdString(loc->getCli()->getPrenom());
+
+        listLocation->addItem(client);
+    }
+
+    this->refresh_ShowLocations();
+}
+
+void MainWindow::refresh_ShowLocations(){
+    QComboBox *listLocation = ui->show_locLocation;
+
+    int idLocation = listLocation->currentIndex();
+
+    Location* l = application.getLocation(idLocation);
+    Client* c = l->getCli();
+    Vehicule* v = l->getVehic();
+
+    QString client = QString::fromStdString(l->getCli()->getNom()) +" "+ QString::fromStdString(l->getCli()->getPrenom());
+
+    ui->show_locClient->setText(client);
+    ui->show_locRefBanq->setText(QString::fromStdString(l->getModePaiement()));
+    ui->show_locDateDebut->setText(QString::fromStdString(l->getDateDebut().toString()));
+    ui->show_locDateFin->setText(QString::fromStdString(l->getDateFin().toString()));
+    ui->show_locTypeVeh->setText(QString::fromStdString(v->getType()));
+    ui->show_locAssist->setText(QString::number(l->getAssistance()));
+    //ui->show_locParc->setText();
+    ui->show_locVeh->setText(QString::fromStdString(v->getModele()));
+
+    //std::cout << "idLocation : " << idLocation << std::endl;
 }
 
 void MainWindow::refresh_ListVehAfterValid(){
@@ -382,6 +428,7 @@ void MainWindow::valid_addVehicule(){
    ui->add_vehPrix->setValue(0);
 
    //this->refresh_ListVeh();
+   this->refresh();
 
 }
 
@@ -532,6 +579,8 @@ void MainWindow::valid_addLocation(){
     ui->add_locRefBanq->setText("");
     ui->add_locDuree->setValue(0);
 
+    this->refresh();
+
 }
 
 
@@ -564,4 +613,8 @@ void MainWindow::form_addParc(){
 
 void MainWindow::form_addLocation(){
     ui->tabWidget->setCurrentIndex(5);
+}
+
+void MainWindow::tab_showLocations(){
+    ui->tabWidget->setCurrentIndex(6);
 }

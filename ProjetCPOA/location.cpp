@@ -55,6 +55,16 @@ void Location::setModePaiement(const std::string &value)
     modePaiement = value;
 }
 
+bool Location::getAssistance() const
+{
+    return assistance;
+}
+
+void Location::setAssistance(const bool &value)
+{
+    assistance = value;
+}
+
 Date Location::getDateDebut() const
 {
     return dateDebut;

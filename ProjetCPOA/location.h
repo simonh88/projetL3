@@ -26,6 +26,8 @@ public:
     void setPrix(double value);
     std::string getModePaiement() const;
     void setModePaiement(const std::string &value);
+    bool getAssistance() const;
+    void setAssistance(const bool &value);
     Date getDateDebut() const;
     void setDateDebut(const Date &value);
     Date getDateFin() const;

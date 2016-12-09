@@ -27,6 +27,7 @@ public:
 
     int getVehiculesSize(int idParc);
     Vehicule* getVehiculeById(int id, int idParc);
+    Vehicule* getVehiculeByImmat(std::string immatVeh);
     int getClientsSize();
     Client* getClientById(int id);
     void afficherLocations();
@@ -40,8 +41,12 @@ public:
     void loadChauffeurs();
     void loadParcs();
     void loadIndispoVeh();
+    void loadLocations();
+
     int getParcsSize();
     Parc* getParc(int id);
+    int getLocationsSize();
+    Location* getLocation(int id);
 };
 
 #endif // APPLICATION_H

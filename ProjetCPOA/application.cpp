@@ -31,6 +31,7 @@ void Application::loadData(){
     this->loadParcs();
     this->loadVehicules();
     this->loadIndispoVeh();
+    this->loadLocations();
 }
 
 void Application::loadClients(){
@@ -221,6 +222,44 @@ void Application::loadIndispoVeh(){
     }
 }
 
+void Application::loadLocations(){
+    ifstream fichier("../ProjetCPOA/data/locations.txt", ios::in);
+
+    if(fichier)
+    {
+        string ligne;
+        while(getline(fichier, ligne))
+        {
+            //cout << ligne << endl;
+            stringstream ss(ligne);
+            string strIdLocation, strIdClient, refBanq, strDateDebut, strDuree, strAssist, immatVeh;
+
+            getline(ss,strIdLocation, ';');
+            getline(ss,strIdClient, ';');
+            getline(ss,refBanq, ';');
+            getline(ss,strDateDebut, ';');
+            getline(ss,strDuree, ';');
+            getline(ss,strAssist, ';');
+            getline(ss,immatVeh, ';');
+
+            Date dateDebut(strDateDebut);
+            int idLocation = atoi(strIdLocation.c_str());
+            int idClient = atoi(strIdClient.c_str());
+            int duree = atoi(strDuree.c_str());
+            bool assist = to_bool(strAssist);
+
+            Client* c = lesClients.getClient(idClient);
+            Vehicule* v = lesVehicules.getVehiculeByImmat(immatVeh);
+            Location* l = new Location(idLocation, c, refBanq, dateDebut, duree, assist, v);
+
+            lesLocations.addLocation(l);
+        }
+    }
+    else{
+        //cerr << "Impossible d'ouvrir le fichier !" << endl;
+    }
+}
+
 
 //--------------------------------------- ADDER --------------------------------------------------
 
@@ -291,14 +330,27 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
     //lesClients.setClient(c);
 
 
-    ofstream fichier("../ProjetCPOA/data/indispoVeh.txt", ios::out | ios::app);
+    ofstream fichier("../ProjetCPOA/data/locations.txt", ios::out | ios::app);
 
     std::string strDateDebut = loc_DateDebut.toString();
+
+    if(fichier){
+
+        fichier << id <<";"<< loc_idClient <<";"<< loc_refBanq <<";"<< strDateDebut <<";"<< loc_Duree <<";"<< loc_assist <<";"<< loc_immatVeh << endl;
+
+        fichier.flush();
+        fichier.close();
+    }
+
+
+    ofstream fichier2("../ProjetCPOA/data/indispoVeh.txt", ios::out | ios::app);
+
+    std::string strDateDebut2 = loc_DateDebut.toString();
     std::string strDateFin = dateFin.toString();
 
     if(fichier){
 
-        fichier << loc_immatVeh <<";"<< strDateDebut <<";"<< strDateFin << endl;
+        fichier << loc_immatVeh <<";"<< strDateDebut2 <<";"<< strDateFin << endl;
 
         fichier.flush();
         fichier.close();
@@ -404,6 +456,10 @@ Vehicule* Application::getVehiculeById(int id, int idParc){
     return parc->getVehicule(id);
 }
 
+Vehicule* Application::getVehiculeByImmat(std::string immatVeh){
+    return lesVehicules.getVehiculeByImmat(immatVeh);
+}
+
 int Application::getClientsSize(){
     return lesClients.getSize();
 }
@@ -418,4 +474,12 @@ int Application::getParcsSize(){
 
 Parc* Application::getParc(int id){
     return lesParcs.getParc(id);
+}
+
+int Application::getLocationsSize(){
+    return lesLocations.getSize();
+}
+
+Location* Application::getLocation(int id){
+    return lesLocations.getLocation(id);
 }
