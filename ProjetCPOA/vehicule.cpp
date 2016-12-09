@@ -96,7 +96,7 @@ void Vehicule::addIndispo(Periode* p){
 }
 
 void Vehicule::afficherIndispo(){
-    std::cout << "liste indispo \`n" << std::flush;
+    std::cout << "liste indispo \n" << std::flush;
     for(int i = 0; i< this->getSizeIndispo() ; i++){
         this->getPeriode(i)->afficher();
     }
