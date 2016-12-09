@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //----------------MAJ PRIX DANS LOCATIONS----------------------------------//
     connect(ui->add_locDuree, SIGNAL(valueChanged(int)), this, SLOT(majPrixLoc()));
+    connect(ui->add_locDateDebut, SIGNAL(dateChanged(QDate)),this,SLOT(refreshVehiculeLoc()));
+    connect(ui->add_locDuree, SIGNAL(valueChanged(int)),this,SLOT(refreshVehiculeLoc()));
     connect(ui->add_locVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(majPrixLoc()));
 
 
@@ -98,12 +100,22 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
                    QDate dateDebut = ui->add_locDateDebut->date();
                    std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
                    Date d(strDate);
+                   int duree = ui->add_locDuree->value();
                    int j = 0;
                    bool dispo = true;
                    while(j<veh->getSizeIndispo()){
-                        if(!veh->getPeriode(j)->estDispo(d)){
-                            dispo = false;
-                        }
+                       if(duree == 0){
+                           if(!veh->getPeriode(j)->estDispo(d)){
+                               dispo = false;
+                           }
+                       }else{
+                            for(int k = 0 ; k < duree ; k++){
+                                if(!veh->getPeriode(j)->estDispo(d)){
+                                    dispo = false;
+                                }
+                                d = d.ajouter(1);
+                            }
+                       }
                         j++;
                    }
                    if(dispo){
@@ -112,6 +124,22 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
                }
             }
         }
+    }
+}
+
+void MainWindow::refreshVehiculeLoc(){
+    int idParc = ui->add_locParc->currentIndex();
+    int id = ui->choixLocVeh->checkedId();
+    switch(id){
+    case -2://Voiture
+        refresh_ListVeh("Voiture", idParc);
+        break;
+    case -3://Bus
+        refresh_ListVeh("Bus", idParc);
+        break;
+    case -4://Vélo
+        refresh_ListVeh("Velo", idParc);
+        break;
     }
 }
 

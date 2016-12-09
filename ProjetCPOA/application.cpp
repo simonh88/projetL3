@@ -247,7 +247,7 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
 {
     int id = lesLocations.getSize();
     Vehicule* v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
-    Date dateFin = loc_DateDebut.ajouter(loc_Duree);
+    Date dateFin = loc_DateDebut.ajouter(loc_Duree-1);
     Periode* p = new Periode(loc_DateDebut,dateFin);
     v->addIndispo(p);
     v->afficherIndispo();

@@ -35,6 +35,7 @@ private slots :
     void refresh_ListVeh(std::string typeVehicule, int idParc);
     void refresh_ListClient();
     void refresh_ListParc();
+    void refreshVehiculeLoc();
 
     void valid_addClient();
     void valid_addParc();
