@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_addParc, SIGNAL(clicked()), this, SLOT(form_addParc()));
     connect(ui->btn_addLocation, SIGNAL(clicked()), this, SLOT(form_addLocation()));
     connect(ui->btn_showLocations, SIGNAL(clicked()), this, SLOT(tab_showLocations()));
-
+    connect(ui->btn_showVehicules, SIGNAL(clicked()), this, SLOT(tab_showVehicules()));
+    connect(ui->btn_showChauffeurs, SIGNAL(clicked()), this, SLOT(tab_showChauffeurs()));
 
     connect(ui->valid_addClient, SIGNAL(clicked()), this, SLOT(valid_addClient()));
 
@@ -619,4 +620,12 @@ void MainWindow::form_addLocation(){
 
 void MainWindow::tab_showLocations(){
     ui->tabWidget->setCurrentIndex(6);
+}
+
+void MainWindow::tab_showVehicules(){
+    ui->tabWidget->setCurrentIndex(7);
+}
+
+void MainWindow::tab_showChauffeurs(){
+    ui->tabWidget->setCurrentIndex(8);
 }

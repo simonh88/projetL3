@@ -31,6 +31,8 @@ private slots :
     void form_addParc();
     void form_addLocation();
     void tab_showLocations();
+    void tab_showVehicules();
+    void tab_showChauffeurs();
 
     void refresh();
     void refresh_ListVeh(std::string typeVehicule, int idParc);
