@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>
+#include <QMessageBox>
 #include "vehicule.h"
 #include "voiture.h"
 #include "velo.h"
@@ -22,7 +23,7 @@ Application::Application()
 //--------------------------------------- LOADER --------------------------------------------------
 
 bool Application::to_bool(std::string &s) {
-     return s != "0";
+    return s != "0";
 }
 
 void Application::loadData(){
@@ -321,39 +322,102 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
     Date dateFin = loc_DateDebut.ajouter(loc_Duree-1);
     Periode* p = new Periode(loc_DateDebut,dateFin);
     v->addIndispo(p);
-    v->afficherIndispo();
-    //v->setEstDispo(false);// On rend le vehicule indisponible
-    Client* c = lesClients.getClient(loc_idClient);
-    Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
-    lesLocations.addLocation(l);
-    afficherLocations();
-    //lesClients.setClient(c);
+    //v->afficherIndispo();
+
+    Date d = loc_DateDebut.ajouter(0);
+    bool fin = false;
+    //On vérifie que le client veut une assistance
+    if(loc_assist == 1){
+        int i =0;
 
 
-    ofstream fichier("../ProjetCPOA/data/locations.txt", ios::out | ios::app);
+        bool dispo;
+        std::cout << lesChauffeurs.getSize() << std::flush;
+        //Boucle permettant de parcourir la liste des chauffeurs et de savoir si on en a trouvé un dispo
+        while(i < lesChauffeurs.getSize() && fin==false){
+            int j = 0;
+            Chauffeur* chauf = lesChauffeurs.getChauffeur(i);
+            dispo=true;
+            //Boucle permettant de parcourir la liste d'indispo
+            //Pour savoir si le chauffeur est dispo
+            while(j < chauf->getSizeIndispo() && dispo == true){
+                //Si la durée est 1 : On regarde si le chauffeur est dispo a la date prévue
+                if(loc_Duree == 1){
+                    if(!chauf->getPeriode(j)->estDispo(d)){
+                        dispo = false;
+                    }
+                    //Si la durée est supérieur a 1 : on parcourir la liste et on regarde s'il est dispo tous les jours
+                }else{
+                    for(int k = 0 ; k < loc_Duree ; k++){
+                        if(!chauf->getPeriode(j)->estDispo(d)){
+                            dispo = false;
+                        }
+                        d = d.ajouter(1);
+                    }
+                }
+                j++;
+            }
+            if(dispo == true){
+                chauf->addIndispo(p);
+                fin = true;
+            }
+            i++;
+        }
+        //Si on a pas trouvé de chauffeur dispo
+        if(fin == false && dispo == false){
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","Aucun chauffeur disponible pour la periode demande. Votre location ne sera pas enregistrée.");
+            messageBox.setFixedSize(500,200);
+            std::cout << "Aucun chauffeur disponible pour la periode demande" << std::flush;
+        }
+    }
 
-    std::string strDateDebut = loc_DateDebut.toString();
-
-    if(fichier){
-
-        fichier << id <<";"<< loc_idClient <<";"<< loc_refBanq <<";"<< strDateDebut <<";"<< loc_Duree <<";"<< loc_assist <<";"<< loc_immatVeh << endl;
-
-        fichier.flush();
-        fichier.close();
+    bool locOk = false;
+    if(loc_assist ==0){
+        //v->setEstDispo(false);// On rend le vehicule indisponible
+        Client* c = lesClients.getClient(loc_idClient);
+        Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
+        lesLocations.addLocation(l);
+        afficherLocations();
+        //lesClients.setClient(c);
+        locOk = true;
+    }else{
+        if(fin == true){
+            Client* c = lesClients.getClient(loc_idClient);
+            Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
+            lesLocations.addLocation(l);
+            afficherLocations();
+            locOk = true;
+        }
     }
 
 
-    ofstream fichier2("../ProjetCPOA/data/indispoVeh.txt", ios::out | ios::app);
+    if(locOk == 1){
+        ofstream fichier("../ProjetCPOA/data/locations.txt", ios::out | ios::app);
 
-    std::string strDateDebut2 = loc_DateDebut.toString();
-    std::string strDateFin = dateFin.toString();
+        std::string strDateDebut = loc_DateDebut.toString();
 
-    if(fichier){
+        if(fichier){
 
-        fichier << loc_immatVeh <<";"<< strDateDebut2 <<";"<< strDateFin << endl;
+            fichier << id <<";"<< loc_idClient <<";"<< loc_refBanq <<";"<< strDateDebut <<";"<< loc_Duree <<";"<< loc_assist <<";"<< loc_immatVeh << endl;
 
-        fichier.flush();
-        fichier.close();
+            fichier.flush();
+            fichier.close();
+        }
+
+
+        ofstream fichier2("../ProjetCPOA/data/indispoVeh.txt", ios::out | ios::app);
+
+        std::string strDateDebut2 = loc_DateDebut.toString();
+        std::string strDateFin = dateFin.toString();
+
+        if(fichier){
+
+            fichier << loc_immatVeh <<";"<< strDateDebut2 <<";"<< strDateFin << endl;
+
+            fichier.flush();
+            fichier.close();
+        }
     }
 }
 

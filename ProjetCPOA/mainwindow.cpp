@@ -77,16 +77,18 @@ void MainWindow::refresh_ListLocations(){
 
     //std::cout << "getLocationsSize : " << application.getLocationsSize() << std::endl;
 
+    //listLocation->clear();
+    disconnect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
     listLocation->clear();
-
     for(int i=0; i<application.getLocationsSize();i++){
         Location* loc = application.getLocation(i);
 
         QString client = QString::fromStdString(loc->getCli()->getNom()) +" "+ QString::fromStdString(loc->getCli()->getPrenom());
 
         listLocation->addItem(client);
-    }
 
+    }
+    connect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
     this->refresh_ShowLocations();
 }
 
