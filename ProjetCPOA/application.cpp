@@ -547,3 +547,13 @@ int Application::getLocationsSize(){
 Location* Application::getLocation(int id){
     return lesLocations.getLocation(id);
 }
+
+int Application::getChauffeursSize()
+{
+    return lesChauffeurs.getSize();
+}
+
+Chauffeur *Application::getChauffeur(int id)
+{
+    return lesChauffeurs.getChauffeur(id);
+}

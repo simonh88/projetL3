@@ -47,6 +47,8 @@ public:
     Parc* getParc(int id);
     int getLocationsSize();
     Location* getLocation(int id);
+    int getChauffeursSize();
+    Chauffeur* getChauffeur(int id);
 };
 
 #endif // APPLICATION_H

@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valid_addParc, SIGNAL(clicked()), this, SLOT(valid_addParc()));
     connect(ui->valid_addChauffeur, SIGNAL(clicked()), this, SLOT(valid_addChauffeur()));
 
-    connect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
 
 
     this->refresh();
@@ -128,7 +127,7 @@ void MainWindow::refresh_showVeh(){
     //std::cout << "getLocationsSize : " << application.getLocationsSize() << std::endl;
 
     //listLocation->clear();
-    //disconnect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
+    disconnect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
     listVehicules->clear();
     for(int i=0; i<application.getParcsSize(); i++){
         Parc* parc = application.getParc(i);
@@ -139,12 +138,11 @@ void MainWindow::refresh_showVeh(){
             listVehicules->addItem(vehicule);
         }
     }
-    //connect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
+    connect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
     //this->refresh_ShowInfosVeh();
 }
 
 void MainWindow::refresh_ShowInfosVeh(){
-    //QComboBox *listVehicules = ui->show_vehVehicule;
 
     //On split le resultat pour avoir que l'immat du vehicule
     QString infosVeh = ui->show_vehVehicule->currentText();
@@ -157,6 +155,7 @@ void MainWindow::refresh_ShowInfosVeh(){
 
 
     Vehicule* v = application.getVehiculeByImmat(immat);
+
     std::stringstream ss;
     ss << v->getPrixJournee();
 
@@ -171,19 +170,18 @@ void MainWindow::refresh_ShowInfosVeh(){
 
 /*------------------------------Refresh page show Chauffeurs -----------------------*/
 void MainWindow::refresh_showChau(){
-    QComboBox *listLocation = ui->show_locLocation;
-
+    QComboBox *listChauffeurs = ui->show_chauChauffeur;
     //std::cout << "getLocationsSize : " << application.getLocationsSize() << std::endl;
 
-    //listLocation->clear();
-    disconnect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
-    listLocation->clear();
-    for(int i=0; i<application.getLocationsSize();i++){
-        Location* loc = application.getLocation(i);
 
-        QString client = QString::fromStdString(loc->getCli()->getNom()) +" "+ QString::fromStdString(loc->getCli()->getPrenom());
+    disconnect(ui->show_chauChauffeur, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosChau()));
+    listChauffeurs->clear();
+    for(int i=0; i<application.getChauffeursSize();i++){
+        Chauffeur* chauffeur = application.getChauffeur(i);
 
-        listLocation->addItem(client);
+        QString strchauffeur = QString::fromStdString(chauffeur->getNom()) +" "+ QString::fromStdString(chauffeur->getPrenom());
+
+        listChauffeurs->addItem(strchauffeur);
 
     }
     connect(ui->show_chauChauffeur, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosChau()));
@@ -191,26 +189,13 @@ void MainWindow::refresh_showChau(){
 }
 
 void MainWindow::refresh_ShowInfosChau(){
-    QComboBox *listLocation = ui->show_locLocation;
 
-    int idLocation = listLocation->currentIndex();
+    int idChauffeur = ui->show_chauChauffeur->currentIndex();
+    Chauffeur* chauffeur = application.getChauffeur(idChauffeur);
+    ui->show_chauNom->setText(QString::fromStdString(chauffeur->getNom()));
+    ui->show_chauPrenom->setText(QString::fromStdString(chauffeur->getPrenom()));
+    ui->show_chauPermis->setText(QString::fromStdString(chauffeur->getNoPermis()));
 
-    Location* l = application.getLocation(idLocation);
-    Client* c = l->getCli();
-    Vehicule* v = l->getVehic();
-
-    QString client = QString::fromStdString(l->getCli()->getNom()) +" "+ QString::fromStdString(l->getCli()->getPrenom());
-
-    ui->show_locClient->setText(client);
-    ui->show_locRefBanq->setText(QString::fromStdString(l->getModePaiement()));
-    ui->show_locDateDebut->setText(QString::fromStdString(l->getDateDebut().toString()));
-    ui->show_locDateFin->setText(QString::fromStdString(l->getDateFin().toString()));
-    ui->show_locTypeVeh->setText(QString::fromStdString(v->getType()));
-    ui->show_locAssist->setText(QString::number(l->getAssistance()));
-    //ui->show_locParc->setText();
-    ui->show_locVeh->setText(QString::fromStdString(v->getModele()));
-
-    //std::cout << "idLocation : " << idLocation << std::endl;
 }
 
 
@@ -729,4 +714,5 @@ void MainWindow::tab_showVehicules(){
 
 void MainWindow::tab_showChauffeurs(){
     ui->tabWidget->setCurrentIndex(8);
+    this->refresh_showChau();
 }
