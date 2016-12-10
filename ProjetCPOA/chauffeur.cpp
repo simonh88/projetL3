@@ -25,6 +25,14 @@ std::string Chauffeur::getNoPermis() const{
     return noPermis;
 }
 
+Periode* Chauffeur::getPeriode(int i) const{
+    return this->periodeIndispo.at(i);
+}
+
+int Chauffeur::getSizeIndispo(){
+    return this->periodeIndispo.size();
+}
+
 void Chauffeur::setNom(const std::string &value){
     nom = value;
 }
@@ -42,6 +50,17 @@ void Chauffeur::setPermis(std::string &value){
     noPermis = value;
 }
 
+
+void Chauffeur::addIndispo(Periode* p){
+    this->periodeIndispo.push_back(p);
+}
+
+void Chauffeur::afficherIndispo(){
+    std::cout << "liste indispo \n" << std::flush;
+    for(int i = 0; i< this->getSizeIndispo() ; i++){
+        this->getPeriode(i)->afficher();
+    }
+}
 
 void Chauffeur::printChauffeur(){
     std::cout << "- Chauffeur : \n" << std::flush;
