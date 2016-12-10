@@ -45,6 +45,12 @@ std::string Vehicule::getImmatriculation() const
     return this->immatriculation;
 }
 
+std::string Vehicule::getAssist() const
+{
+    if(this->assistElec) return "Avec assistance électrique";
+    else return "Sans assistance électrique";
+}
+
 bool Vehicule::getEstDispo() const
 {
     return this->estDispo;

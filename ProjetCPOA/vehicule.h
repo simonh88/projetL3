@@ -39,6 +39,7 @@ public:
     void addIndispo(Periode* value);
     void afficherIndispo();
     void printVehicule();
+    std::string getAssist() const;
 };
 
 #endif // VEHICULE_H

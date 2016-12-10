@@ -41,20 +41,25 @@ private slots :
     void refreshVehiculeLoc();
     void refresh_ListLocations();
     void refresh_ShowLocations();
+    void refresh_ListVehAfterValid();
+    void refresh_showVeh();
+    void refresh_ShowInfosVeh();
+    void refresh_showChau();
+    void refresh_ShowInfosChau();
+
 
     void valid_addClient();
     void valid_addParc();
     void valid_addChauffeur();
-
     void valid_addVehicule();
+    void valid_addLocation();
+
     void select_typeVeh(int id);
     void select_locVeh(int id);
-
-    void valid_addLocation();
     void select_parc(int idParc);
 
     void majPrixLoc();
-    void refresh_ListVehAfterValid();
+
 };
 
 #endif // MAINWINDOW_H
