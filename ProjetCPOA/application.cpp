@@ -291,7 +291,7 @@ void Application::loadCtrlVehic(){
             ControleVehicule* cv = new ControleVehicule(immat,p);
             lesControlesVehicules.addControleVehicule(cv);
 
-            cv->afficherControle();
+            //---AFFICHAGE cv->afficherControle();
 
         }
     }
@@ -327,7 +327,7 @@ void Application::loadCtrlChauff(){
             ControleChauffeur* cc = new ControleChauffeur(id,p);
             lesControlesChauffeurs.addControleChauffeur(cc);
 
-            cc->afficherControle();
+            //---AFFICHAGE cc->afficherControle();
 
         }
     }
@@ -453,7 +453,7 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
         Client* c = lesClients.getClient(loc_idClient);
         Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
         lesLocations.addLocation(l);
-        afficherLocations();
+       //---AFFICHAGE  afficherLocations();
 
         generateLocation(l);
 
@@ -464,7 +464,7 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
             Client* c = lesClients.getClient(loc_idClient);
             Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
             lesLocations.addLocation(l);
-            afficherLocations();
+            //---AFFICHAGE afficherLocations();
 
             generateLocation(l);
 
@@ -508,7 +508,7 @@ void Application::addParc(Parc* parc)
 
     lesParcs.addParc(parc);
 
-    afficherParcs();
+    //---AFFICHAGE afficherParcs();
 
     ofstream fichier("../ProjetCPOA/data/parcs.txt", ios::out | ios::app);
 
@@ -528,7 +528,7 @@ void Application::addChauffeur(Chauffeur* chauffeur)
 {
     lesChauffeurs.addChauffeur(chauffeur);
 
-    afficherChauffeurs();
+    //---AFFICHAGE afficherChauffeurs();
 
     ofstream fichier("../ProjetCPOA/data/chauffeurs.txt", ios::out | ios::app);
 
@@ -549,7 +549,7 @@ void Application::addControleVehic(Date &dateDeb, Date &dateFin, Vehicule* vehic
     vehic->addIndispo(p);
     std::string immatVehic = vehic->getImmatriculation();
     ControleVehicule* cv = new ControleVehicule(immatVehic,p);
-    cv->afficherControle();
+    //---AFFICHAGE cv->afficherControle();
     lesControlesVehicules.addControleVehicule(cv);
 
     ofstream fichier("../ProjetCPOA/data/ctrlVehic.txt", ios::out | ios::app);
@@ -571,7 +571,7 @@ void Application::addControleChauff(Date &dateDeb, Date &dateFin, Chauffeur* c, 
     c->addIndispo(p);
 
     ControleChauffeur* cc = new ControleChauffeur(id,p);
-    cc->afficherControle();
+    //---AFFICHAGE cc->afficherControle();
     lesControlesChauffeurs.addControleChauffeur(cc);
 
     ofstream fichier("../ProjetCPOA/data/ctrlChauff.txt", ios::out | ios::app);

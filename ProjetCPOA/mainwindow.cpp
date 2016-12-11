@@ -552,7 +552,7 @@ void MainWindow::valid_addControleVehic(){
     std::istringstream iss(vehicule);
     std::string immat;
     getline(iss, immat, ' ');
-    std::cout << "Vehicule : " << immat << std::flush;
+    //---AFFICHAGE std::cout << "Vehicule : " << immat << std::flush;
 
     int i = 0;
     bool trouve = false;
