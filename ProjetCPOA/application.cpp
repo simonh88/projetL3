@@ -33,6 +33,8 @@ void Application::loadData(){
     this->loadVehicules();
     this->loadIndispoVeh();
     this->loadLocations();
+    this->loadCtrlVehic();
+    this->loadCtrlChauff();
 }
 
 void Application::loadClients(){
@@ -261,6 +263,77 @@ void Application::loadLocations(){
     }
 }
 
+void Application::loadCtrlVehic(){
+    ifstream fichier("../ProjetCPOA/data/ctrlVehic.txt", ios::in);
+
+    if(fichier)
+    {
+        string ligne;
+        while(getline(fichier, ligne))
+        {
+            //cout << ligne << endl;
+            stringstream ss(ligne);
+            string immat, strDateDebut, strDateFin;
+
+            getline(ss,immat, ';');
+            getline(ss,strDateDebut, ';');
+            getline(ss,strDateFin, ';');
+
+            Date dateDebut(strDateDebut);
+            Date dateFin(strDateFin);
+
+            Periode* p = new Periode(dateDebut,dateFin);
+            Vehicule* v = getVehiculeByImmat(immat);
+            v->addIndispo(p);
+
+            ControleVehicule* cv = new ControleVehicule(immat,p);
+            lesControlesVehicules.addControleVehicule(cv);
+
+            cv->afficherControle();
+
+        }
+    }
+    else{
+        //cerr << "Impossible d'ouvrir le fichier !" << endl;
+    }
+}
+
+void Application::loadCtrlChauff(){
+    ifstream fichier("../ProjetCPOA/data/ctrlChauff.txt", ios::in);
+
+    if(fichier)
+    {
+        string ligne;
+        while(getline(fichier, ligne))
+        {
+            //cout << ligne << endl;
+            stringstream ss(ligne);
+            string idstr, strDateDebut, strDateFin;
+
+            getline(ss,idstr, ';');
+            getline(ss,strDateDebut, ';');
+            getline(ss,strDateFin, ';');
+
+            int id = atoi(idstr.c_str());
+            Date dateDebut(strDateDebut);
+            Date dateFin(strDateFin);
+
+            Periode* p = new Periode(dateDebut,dateFin);
+            Chauffeur* c = getChauffeur(id);
+            c->addIndispo(p);
+
+            ControleChauffeur* cc = new ControleChauffeur(id,p);
+            lesControlesChauffeurs.addControleChauffeur(cc);
+
+            cc->afficherControle();
+
+        }
+    }
+    else{
+        //cerr << "Impossible d'ouvrir le fichier !" << endl;
+    }
+}
+
 
 //--------------------------------------- ADDER --------------------------------------------------
 
@@ -315,7 +388,7 @@ void Application::addClient(std::string &client_Nom, std::string &client_Prenom,
 
 }
 
-void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh)
+void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date &loc_DateDebut, int &loc_Duree, bool &loc_assist, std::string &loc_immatVeh, std::string &loc_prix)
 {
     int id = lesLocations.getSize();
     Vehicule* v = lesVehicules.getVehiculeByImmat(loc_immatVeh);
@@ -399,7 +472,7 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
 
         if(fichier){
 
-            fichier << id <<";"<< loc_idClient <<";"<< loc_refBanq <<";"<< strDateDebut <<";"<< loc_Duree <<";"<< loc_assist <<";"<< loc_immatVeh << endl;
+            fichier << id <<";"<< loc_idClient <<";"<< loc_refBanq <<";"<< strDateDebut <<";"<< loc_Duree <<";"<< loc_assist <<";"<< loc_immatVeh <<";"<< loc_prix << endl;
 
             fichier.flush();
             fichier.close();
@@ -466,10 +539,45 @@ void Application::addChauffeur(Chauffeur* chauffeur)
 void Application::addControleVehic(Date &dateDeb, Date &dateFin, Vehicule* vehic){
     Periode* p = new Periode(dateDeb,dateFin);
     vehic->addIndispo(p);
-    std::string nomVehic = vehic->getModele();
-    ControleVehicule* cv = new ControleVehicule(nomVehic,p);
+    std::string immatVehic = vehic->getImmatriculation();
+    ControleVehicule* cv = new ControleVehicule(immatVehic,p);
     cv->afficherControle();
     lesControlesVehicules.addControleVehicule(cv);
+
+    ofstream fichier("../ProjetCPOA/data/ctrlVehic.txt", ios::out | ios::app);
+
+    if(fichier){
+
+        fichier << immatVehic <<";"<< dateDeb.toString() <<";"<< dateFin.toString() << endl;
+
+        fichier.flush();
+        fichier.close();
+    }
+    else{
+        //cerr << "Erreur à l'ouverture !" << endl;
+    }
+}
+
+void Application::addControleChauff(Date &dateDeb, Date &dateFin, Chauffeur* c, int id){
+    Periode* p = new Periode(dateDeb,dateFin);
+    c->addIndispo(p);
+
+    ControleChauffeur* cc = new ControleChauffeur(id,p);
+    cc->afficherControle();
+    lesControlesChauffeurs.addControleChauffeur(cc);
+
+    ofstream fichier("../ProjetCPOA/data/ctrlChauff.txt", ios::out | ios::app);
+
+    if(fichier){
+
+        fichier << id <<";"<< dateDeb.toString() <<";"<< dateFin.toString() << endl;
+
+        fichier.flush();
+        fichier.close();
+    }
+    else{
+        //cerr << "Erreur à l'ouverture !" << endl;
+    }
 }
 
 
@@ -565,4 +673,16 @@ int Application::getChauffeursSize()
 Chauffeur *Application::getChauffeur(int id)
 {
     return lesChauffeurs.getChauffeur(id);
+}
+
+Parc* Application::getParcByVeh(std::string immat){
+    for(int i=0;i<getParcsSize();i++){
+        Parc* p = getParc(i);
+
+        if (p->containsVeh(immat)){
+            return p;
+        }
+    }
+
+    return getParc(0);
 }

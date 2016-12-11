@@ -54,6 +54,7 @@ private slots :
     void valid_addVehicule();
     void valid_addLocation();
     void valid_addControleVehic();
+    void valid_addControleChauff();
 
     void select_typeVeh(int id);
     void select_locVeh(int id);

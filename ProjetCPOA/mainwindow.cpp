@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
 
     connect(ui->validAddControleVeh, SIGNAL(clicked(bool)),this,SLOT(valid_addControleVehic()));
+    connect(ui->valid_addControleChauff, SIGNAL(clicked(bool)),this,SLOT(valid_addControleChauff()));
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(refresh_ListVehAfterValid()));
 
@@ -115,8 +116,15 @@ void MainWindow::refresh_ShowLocations(){
     ui->show_locDateFin->setText(QString::fromStdString(l->getDateFin().toString()));
     ui->show_locTypeVeh->setText(QString::fromStdString(v->getType()));
     ui->show_locAssist->setText(QString::number(l->getAssistance()));
-    //ui->show_locParc->setText();
+
+    std::stringstream oss;
+    oss << "<p align='center'><span style='font-size:11pt; font-weight:600;'>Prix : " << l->getPrix() << " euros</p>";
+    std::string prix = oss.str();
+
+    ui->show_locPrix->setText(QString::fromStdString(prix));
     ui->show_locVeh->setText(QString::fromStdString(v->getModele()));
+
+    ui->show_locParc->setText(QString::fromStdString(application.getParcByVeh(v->getImmatriculation())->getNom()));
 
     //std::cout << "idLocation : " << idLocation << std::endl;
 }
@@ -140,7 +148,7 @@ void MainWindow::refresh_showVeh(){
         }
     }
     connect(ui->show_vehVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowInfosVeh()));
-    //this->refresh_ShowInfosVeh();
+    this->refresh_ShowInfosVeh();
 }
 
 void MainWindow::refresh_ShowInfosVeh(){
@@ -165,6 +173,10 @@ void MainWindow::refresh_ShowInfosVeh(){
     ui->show_vehModele->setText(QString::fromStdString(v->getModele()));
     ui->show_vehPrix->setText(QString::fromStdString(ss.str()));
     ui->show_vehType->setText(QString::fromStdString(v->getType()));
+
+
+
+    //ui->show_vehNbPlaces->setText(QString::fromStdString(v->getNbPlaces()));
 
     //std::cout << "idLocation : " << idLocation << std::endl;
 }
@@ -555,6 +567,35 @@ void MainWindow::valid_addControleVehic(){
     application.addControleVehic(dDeb,dFin,v);
 }
 
+void MainWindow::valid_addControleChauff(){
+
+    QDate dateDeb = ui->add_controleChauffDateDeb->date();
+    QDate dateF = ui->add_controleChauffDateFin->date();
+    std::string strDateDeb = dateDeb.toString("dd/MM/yyyy").toStdString();
+    std::string strDateFin = dateF.toString("dd/MM/yyyy").toStdString();
+    Date dDeb(strDateDeb);
+    Date dFin(strDateFin);
+
+
+    int i = 0;
+    bool trouve = false;
+    Chauffeur* c;
+    while(i<application.getChauffeursSize() && trouve == false){
+        c = application.getChauffeur(i);
+
+        if(c != 0){
+            trouve = true;
+        }
+        else{
+            i++;
+        }
+    }
+
+    c->printChauffeur();
+
+    application.addControleChauff(dDeb,dFin,c, i);
+}
+
 
 
 void MainWindow::select_locVeh(int typeVeh){
@@ -675,6 +716,7 @@ void MainWindow::valid_addLocation(){
     //int typeVeh = ui->choixTypeVeh->checkedId();
     bool assist = ui->add_locAssist->isChecked();
     QString immatVeh = ui->add_locVehicule->currentData().toString();
+    QString prix = ui->label_locPrix->text();
 
     bool check = true;
 
@@ -695,7 +737,8 @@ void MainWindow::valid_addLocation(){
     Date d(strDate);
     std::string refBanqstr = refBanq.toStdString();
     std::string immatVehstr = immatVeh.toStdString();
-    application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr);
+    std::string prixstr = prix.toStdString();
+    application.addLocation(idClient, refBanqstr, d, duree, assist, immatVehstr, prixstr);
 
     ui->add_locAssist->setChecked(false);
     ui->add_locBus->setChecked(false);

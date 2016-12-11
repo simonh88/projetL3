@@ -27,6 +27,8 @@ public:
     Vehicule* getVehicule(int id);
     int getVehiculesSize();
     Vehicule *getVehiculeByImmat(std::string immat);
+
+    bool containsVeh(std::string immat);
 };
 
 #endif // PARC_H

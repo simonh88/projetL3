@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>8</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -1461,9 +1461,9 @@
      <widget class="QLabel" name="label_54">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>260</x>
         <y>30</y>
-        <width>311</width>
+        <width>361</width>
         <height>31</height>
        </rect>
       </property>
@@ -1489,7 +1489,7 @@
        <rect>
         <x>410</x>
         <y>100</y>
-        <width>221</width>
+        <width>241</width>
         <height>27</height>
        </rect>
       </property>
@@ -1653,8 +1653,8 @@
      <widget class="QDateEdit" name="addControleVehDateDeb">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>410</y>
+        <x>520</x>
+        <y>470</y>
         <width>110</width>
         <height>22</height>
        </rect>
@@ -1664,7 +1664,7 @@
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>410</y>
+        <y>470</y>
         <width>171</width>
         <height>31</height>
        </rect>
@@ -1677,7 +1677,7 @@
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>450</y>
+        <y>510</y>
         <width>171</width>
         <height>31</height>
        </rect>
@@ -1689,8 +1689,8 @@
      <widget class="QDateEdit" name="addControleVehDateFin">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>450</y>
+        <x>520</x>
+        <y>510</y>
         <width>110</width>
         <height>22</height>
        </rect>
@@ -1699,14 +1699,27 @@
      <widget class="QPushButton" name="validAddControleVeh">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>500</y>
+        <x>410</x>
+        <y>560</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Valider</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_57">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>410</y>
+        <width>361</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Ajouter un Contrôle Technique&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -1828,6 +1841,78 @@
        <string/>
       </property>
      </widget>
+     <widget class="QDateEdit" name="add_controleChauffDateDeb">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>390</y>
+        <width>110</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="add_controleChauffDateFin">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>430</y>
+        <width>110</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_159">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>430</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Date de fin  : </string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="valid_addControleChauff">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>480</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Valider</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_160">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>390</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Date de début  : </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_58">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>330</y>
+        <width>361</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Ajouter un Contrôle Chauffeur&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1836,7 +1921,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="choixTypeVeh"/>
   <buttongroup name="choixLocVeh"/>
+  <buttongroup name="choixTypeVeh"/>
  </buttongroups>
 </ui>

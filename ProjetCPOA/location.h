@@ -34,6 +34,8 @@ public:
     void setDateFin(const Date &value);
     Client* getCli();
     void setCli(Client* &value);
+    double getPrix();
+    void setPrix(double &value);
     void printLocation();
 };
 

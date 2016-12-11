@@ -95,6 +95,16 @@ void Location::setCli(Client* &value)
     cli = value;
 }
 
+double Location::getPrix()
+{
+    return prix;
+}
+
+void Location::setPrix(double &value)
+{
+    prix = value;
+}
+
 void Location::printLocation(){
     std::cout << "LOCATION : " << idLocation <<  "\n" << std::flush;
     std::cout << "idCLient : " << cli->getNom() << "\n" << std::flush;

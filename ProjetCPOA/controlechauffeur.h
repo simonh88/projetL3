@@ -6,17 +6,18 @@
 class ControleChauffeur
 {
 private:
-    std::string nomChauffeur;
+    int idChauffeur;
     Periode* inactivite;
 public:
-    ControleChauffeur();
+    ControleChauffeur(int id, Periode* p);
 
 
-    std::string getNomChauffeur() const;
+    int getIdChauffeur() const;
     Periode *getInactivite() const;
 
-    void setNomChauffeur(const std::string &value);
+    void setIdChauffeur(const int &value);
     void setInactivite(Periode *value);
+    void afficherControle();
 };
 
 #endif // CONTROLECHAUFFEUR_H

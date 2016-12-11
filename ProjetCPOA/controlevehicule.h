@@ -6,16 +6,16 @@
 class ControleVehicule
 {
 private:
-    std::string nomVehicule;
+    std::string immatVehicule;
     Periode* inactivite;
 public:
-    ControleVehicule(std::string nom, Periode* p);
+    ControleVehicule(std::string immat, Periode* p);
 
 
-    std::string getNomVehicule() const;
+    std::string getImmatVehicule() const;
     Periode* getInactivite() const;
 
-    void setNomVehicule(const std::string &value);
+    void setImmatVehicule(const std::string &value);
     void setInactivite(Periode* value);
 
     void afficherControle();
