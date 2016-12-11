@@ -706,10 +706,10 @@ void MainWindow::majPrixLoc(){
 
         std::ostringstream oss;
         oss << prix;
-        std::string message = "<b>Prix : " + oss.str() + " euros</b>" ;
+        std::string message = "<p align='center'><span style='font-size:11pt; font-weight:600;'>Prix : " + oss.str() + " euros</p>" ;
         ui->label_locPrix->setText(QString::fromStdString(message));
     }else{
-        ui->label_locPrix->setText("Prix : 0 euros");
+        ui->label_locPrix->setText("<p align='center'><span style='font-size:11pt; font-weight:600;'>Prix : 0 euros</p>");
     }
 }
 

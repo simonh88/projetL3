@@ -1,0 +1,22 @@
+RECAPITULATIF LOCATION No : 1
+
+
+Client :
+    - Id : 2
+    - Nom : HAJEK
+    - Prenom : Simon
+    - Adresse : Pas très loin
+
+Vehicule :
+    - Type : Bus
+    - Modele : Stan
+    - Immatriculation :ST-158-AN
+    - Prix Journée : 90
+
+Location :
+    - Id : 1
+    - Mode de Paiement : Espèces
+    - Date Début : 3/1/2000
+    - Date Fin : 5/1/2000
+    - Assistance : Oui
+

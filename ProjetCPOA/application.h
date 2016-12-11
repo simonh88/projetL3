@@ -41,6 +41,8 @@ public:
 
     bool to_bool(std::string &s);
 
+    void generateLocation(Location* l);
+
     void loadData();
     void loadClients();
     void loadVehicules();

@@ -1,0 +1,21 @@
+RECAPITULATIF LOCATION No : 2
+
+
+Client :
+    - Id : 1
+    - Nom : COURTIL
+    - Prenom : Antoine
+    - Adresse : Vers là
+
+Vehicule :
+    - Type : Velo
+    - Modele : Bicloo
+    - Immatriculation :51
+    - Prix Journée : 8
+
+Location :
+    - Id : 2
+    - Mode de Paiement : CB
+    - Date Début : 1/1/2000
+    - Date Fin : 3/1/2000
+    - Assistance : Non

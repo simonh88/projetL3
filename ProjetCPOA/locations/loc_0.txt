@@ -1,0 +1,21 @@
+RECAPITULATIF LOCATION No : 0
+
+
+Client :
+    - Id : 1
+    - Nom : COURTIL
+    - Prenom : Antoine
+    - Adresse : Vers là
+
+Vehicule :
+    - Type : Voiture
+    - Modele : BMW X6
+    - Immatriculation :AF-536-VB
+    - Prix Journée : 60
+
+Location :
+    - Id : 0
+    - Mode de Paiement : Carte Bleu
+    - Date Début : 3/1/2000
+    - Date Fin : 5/1/2000
+    - Assistance : Non

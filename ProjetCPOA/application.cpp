@@ -255,6 +255,8 @@ void Application::loadLocations(){
             Vehicule* v = lesVehicules.getVehiculeByImmat(immatVeh);
             Location* l = new Location(idLocation, c, refBanq, dateDebut, duree, assist, v);
 
+            generateLocation(l);
+
             lesLocations.addLocation(l);
         }
     }
@@ -452,6 +454,9 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
         Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
         lesLocations.addLocation(l);
         afficherLocations();
+
+        generateLocation(l);
+
         //lesClients.setClient(c);
         locOk = true;
     }else{
@@ -460,6 +465,9 @@ void Application::addLocation(int &loc_idClient, std::string &loc_refBanq, Date 
             Location* l = new Location(id, c, loc_refBanq, loc_DateDebut, loc_Duree, loc_assist, v);
             lesLocations.addLocation(l);
             afficherLocations();
+
+            generateLocation(l);
+
             locOk = true;
         }
     }
@@ -621,6 +629,8 @@ void Application::afficherParcs(){
 }
 
 
+//---------------------------------------- GETTERS ---------------------------------------------------
+
 
 int Application::getVehiculesSize(int idParc){
     Parc* parc = getParc(idParc);
@@ -685,4 +695,59 @@ Parc* Application::getParcByVeh(std::string immat){
     }
 
     return getParc(0);
+}
+
+
+//-------------------------------------- OTHERS ---------------------------------------------
+
+void Application::generateLocation(Location* l){
+
+    Client* c = l->getCli();
+    Vehicule* v = l->getVehic();
+
+
+    std::stringstream chemin;
+    chemin << "../ProjetCPOA/locations/loc_" << l->getIdLocation() << ".txt" ;
+
+    QString path = QString::fromStdString(chemin.str());
+
+
+    ofstream fichier(chemin.str().c_str(), ios::out | ios::trunc);
+
+    if(fichier){
+
+        fichier << "RECAPITULATIF LOCATION No : " << l->getIdLocation() << endl << endl << endl;
+
+        fichier  << "Client :" << endl;
+        fichier << "    - Id : " << c->getIdClient() << endl;
+        fichier << "    - Nom : " << c->getNom() << endl;
+        fichier << "    - Prenom : " << c->getPrenom() << endl;
+        fichier << "    - Adresse : " << c->getAdresse() << endl << endl;
+
+        fichier  << "Vehicule :" << endl;
+        fichier << "    - Type : " << v->getType() << endl;
+        fichier << "    - Modele : " << v->getModele() << endl;
+        fichier << "    - Immatriculation :" << v->getImmatriculation() << endl;
+        fichier << "    - Prix Journée : " << v->getPrixJournee() << endl << endl;
+
+        fichier  << "Location :" << endl;
+        fichier << "    - Id : " << l->getIdLocation() << endl;
+        fichier << "    - Mode de Paiement : " << l->getModePaiement() << endl;
+        fichier << "    - Date Début : " << l->getDateDebut().toString() << endl;
+        fichier << "    - Date Fin : " << l->getDateFin().toString() << endl;
+
+        //bool assist = to_bool(l->getAssistance());
+
+        if(l->getAssistance()){
+            fichier << "    - Assistance : Oui" << endl << endl;
+        }
+
+        else{
+            fichier << "    - Assistance : Non" << endl;
+        }
+
+
+        fichier.flush();
+        fichier.close();
+    }
 }
