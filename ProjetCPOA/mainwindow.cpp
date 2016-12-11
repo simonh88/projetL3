@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
 
+    connect(ui->validAddControleVeh, SIGNAL(clicked(bool)),this,SLOT(valid_addControleVehic()));
 
     connect(ui->valid_addLocation, SIGNAL(clicked()), this, SLOT(refresh_ListVehAfterValid()));
 
@@ -229,34 +230,34 @@ void MainWindow::refresh_ListVeh(std::string typeVehicule, int idParc){
         for(int i=0; i<application.getVehiculesSize(idParc);i++){
             Vehicule* veh = application.getVehiculeById(i, idParc);
             if(veh->getEstDispo()){
-               if(typeVehicule.empty()){
-                   listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
-               }else if(veh->getType().compare(typeVehicule) == 0){
-                   QDate dateDebut = ui->add_locDateDebut->date();
-                   std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
-                   Date d(strDate);
-                   int duree = ui->add_locDuree->value();
-                   int j = 0;
-                   bool dispo = true;
-                   while(j<veh->getSizeIndispo()){
-                       if(duree == 0){
-                           if(!veh->getPeriode(j)->estDispo(d)){
-                               dispo = false;
-                           }
-                       }else{
+                if(typeVehicule.empty()){
+                    listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
+                }else if(veh->getType().compare(typeVehicule) == 0){
+                    QDate dateDebut = ui->add_locDateDebut->date();
+                    std::string strDate = dateDebut.toString("dd/MM/yyyy").toStdString();
+                    Date d(strDate);
+                    int duree = ui->add_locDuree->value();
+                    int j = 0;
+                    bool dispo = true;
+                    while(j<veh->getSizeIndispo()){
+                        if(duree == 0){
+                            if(!veh->getPeriode(j)->estDispo(d)){
+                                dispo = false;
+                            }
+                        }else{
                             for(int k = 0 ; k < duree ; k++){
                                 if(!veh->getPeriode(j)->estDispo(d)){
                                     dispo = false;
                                 }
                                 d = d.ajouter(1);
                             }
-                       }
+                        }
                         j++;
-                   }
-                   if(dispo){
+                    }
+                    if(dispo){
                         listVeh->addItem(QString::fromStdString(veh->getModele()), QString::fromStdString(veh->getImmatriculation()));
-                   }
-               }
+                    }
+                }
             }
         }
     }
@@ -333,7 +334,7 @@ void MainWindow::valid_addChauffeur(){
         std::string prenomstr = prenom.toStdString();
         std::string permisstr = permis.toStdString();
 
-    //std::cout << "Dispo :  "<< dispo << std::flush;
+        //std::cout << "Dispo :  "<< dispo << std::flush;
         Chauffeur* chauffeur = new Chauffeur(permisstr, nomstr, prenomstr, dispo);
         application.addChauffeur(chauffeur);
 
@@ -476,50 +477,85 @@ void MainWindow::valid_addVehicule(){
 
     switch(typeVeh)
     {
-        case -3: //VOITURE
-         {
-            //std::cout << "form addVeh voiture ok\n\n" << std::flush;
+    case -3: //VOITURE
+    {
+        //std::cout << "form addVeh voiture ok\n\n" << std::flush;
 
-            Voiture* v = new Voiture(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(v, nbPlaces, idParc);
+        Voiture* v = new Voiture(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
+        application.addVehicule(v, nbPlaces, idParc);
 
-            //Instanciation nouvelle voiture
-        }
+        //Instanciation nouvelle voiture
+    }
         break;
-        case -2: //BUS
-        {
-            //std::cout << "form addVeh bus ok\n\n" << std::flush;
-            Bus* b = new Bus(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
-            application.addVehicule(b, nbPlaces, idParc);
-        }
+    case -2: //BUS
+    {
+        //std::cout << "form addVeh bus ok\n\n" << std::flush;
+        Bus* b = new Bus(strImmatriculation, strModele, nbPlaces, estDispo, prixJournee);
+        application.addVehicule(b, nbPlaces, idParc);
+    }
         break;
-        case -4: //VELO
-        {
-            //std::cout << "form addVeh velo ok\n\n" << std::flush;
+    case -4: //VELO
+    {
+        //std::cout << "form addVeh velo ok\n\n" << std::flush;
 
-            Velo* v = new Velo(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
-            application.addVehicule(v, assistElec, idParc);
+        Velo* v = new Velo(strImmatriculation, strModele, estDispo, prixJournee, assistElec);
+        application.addVehicule(v, assistElec, idParc);
 
-        }
+    }
         break;
-        default:
-        {
-            //std::cout << "form addVeh choix veh a faire\n\n" << std::flush;
-            check = false;
-        }
+    default:
+    {
+        //std::cout << "form addVeh choix veh a faire\n\n" << std::flush;
+        check = false;
+    }
         break;
     }
 
-   //application.afficherVehicules();
-   ui->add_vehModele->setText("");
-   ui->add_vehImmat->setText("");
-   ui->add_vehPlaces->setValue(0);
-   ui->add_vehPrix->setValue(0);
+    //application.afficherVehicules();
+    ui->add_vehModele->setText("");
+    ui->add_vehImmat->setText("");
+    ui->add_vehPlaces->setValue(0);
+    ui->add_vehPrix->setValue(0);
 
-   //this->refresh_ListVeh();
-   this->refresh();
+    //this->refresh_ListVeh();
+    this->refresh();
 
 }
+
+//-------------------Ajout d'un controle vehicule----------------
+
+void MainWindow::valid_addControleVehic(){
+
+    QDate dateDeb = ui->addControleVehDateDeb->date();
+    QDate dateF = ui->addControleVehDateFin->date();
+    std::string strDateDeb = dateDeb.toString("dd/MM/yyyy").toStdString();
+    std::string strDateFin = dateF.toString("dd/MM/yyyy").toStdString();
+    Date dDeb(strDateDeb);
+    Date dFin(strDateFin);
+
+
+    QString infosVeh = ui->show_vehVehicule->currentText();
+    std::string vehicule = infosVeh.toStdString();
+    std::istringstream iss(vehicule);
+    std::string immat;
+    getline(iss, immat, ' ');
+    std::cout << "Vehicule : " << immat << std::flush;
+
+    int i = 0;
+    bool trouve = false;
+    Vehicule* v;
+    while(i<application.getParcsSize() && trouve == false){
+        Parc* p = application.getParc(i);
+        v = p->getVehiculeByImmat(immat);
+        if(v != 0){
+            trouve = true;
+        }
+    }
+    v->printVehicule();
+    application.addControleVehic(dDeb,dFin,v);
+}
+
+
 
 void MainWindow::select_locVeh(int typeVeh){
     ui->add_locVehicule->setEnabled(true);

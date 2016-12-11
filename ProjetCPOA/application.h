@@ -5,6 +5,7 @@
 #include "lesvehicules.h"
 #include "lesparcs.h"
 #include "leschauffeurs.h"
+#include "lescontrolesvehicules.h"
 
 class Application
 {
@@ -14,6 +15,7 @@ private:
     LesClients lesClients;
     LesParcs lesParcs;
     LesChauffeurs lesChauffeurs;
+    LesControlesVehicules lesControlesVehicules;
 public:
     Application();
     void addVehicule(Vehicule* veh, int nbPlaces, int idParc);
@@ -24,6 +26,7 @@ public:
     void afficherClients();
     void afficherVehicules();
     void afficherChauffeurs();
+    void addControleVehic(Date &debut, Date &fin, Vehicule* vehic);
 
     int getVehiculesSize(int idParc);
     Vehicule* getVehiculeById(int id, int idParc);

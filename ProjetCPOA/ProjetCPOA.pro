@@ -29,7 +29,11 @@ SOURCES += main.cpp\
     parc.cpp \
     leschauffeurs.cpp \
     chauffeur.cpp \
-    periode.cpp
+    periode.cpp \
+    lescontroleschauffeurs.cpp \
+    controlechauffeur.cpp \
+    lescontrolesvehicules.cpp \
+    controlevehicule.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -48,6 +52,10 @@ HEADERS  += mainwindow.h \
     parc.h \
     leschauffeurs.h \
     chauffeur.h \
-    periode.h
+    periode.h \
+    lescontroleschauffeurs.h \
+    controlechauffeur.h \
+    lescontrolesvehicules.h \
+    controlevehicule.h
 
 FORMS    += mainwindow.ui

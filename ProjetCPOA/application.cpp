@@ -463,6 +463,15 @@ void Application::addChauffeur(Chauffeur* chauffeur)
     }
 }
 
+void Application::addControleVehic(Date &dateDeb, Date &dateFin, Vehicule* vehic){
+    Periode* p = new Periode(dateDeb,dateFin);
+    vehic->addIndispo(p);
+    std::string nomVehic = vehic->getModele();
+    ControleVehicule* cv = new ControleVehicule(nomVehic,p);
+    cv->afficherControle();
+    lesControlesVehicules.addControleVehicule(cv);
+}
+
 
 //--------------------------------------- AFFICHEURS --------------------------------------------------
 
