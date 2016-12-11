@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>5</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -1921,7 +1921,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="choixLocVeh"/>
   <buttongroup name="choixTypeVeh"/>
+  <buttongroup name="choixLocVeh"/>
  </buttongroups>
 </ui>

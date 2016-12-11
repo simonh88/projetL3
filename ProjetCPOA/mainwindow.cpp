@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->add_locDateDebut, SIGNAL(dateChanged(QDate)),this,SLOT(refreshVehiculeLoc()));
     connect(ui->add_locDuree, SIGNAL(valueChanged(int)),this,SLOT(refreshVehiculeLoc()));
     connect(ui->add_locVehicule, SIGNAL(currentIndexChanged(int)), this, SLOT(majPrixLoc()));
+    connect(ui->add_locAssist, SIGNAL(clicked()), this, SLOT(majPrixLoc()));
 
 
     connect(ui->show_locLocation, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_ShowLocations()));
@@ -696,6 +697,13 @@ void MainWindow::majPrixLoc(){
         int duree = ui->add_locDuree->value();
         Vehicule* v = application.getParc(idParc)->getVehiculeByImmat(vehicule);
         int prix = v->getPrixJournee() * duree;
+
+        bool assist = ui->add_locAssist->isChecked();
+
+        if(assist){
+            prix = prix*2;
+        }
+
         std::ostringstream oss;
         oss << prix;
         std::string message = "<b>Prix : " + oss.str() + " euros</b>" ;
